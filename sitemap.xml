@@ -15,6 +15,7 @@
 <url> <loc>https://buildiful.github.io/docs/doc5</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://buildiful.github.io/docs/doc5" /> </url>
 <url> <loc>https://buildiful.github.io/docs/fun/01-polaroid-onestep-land-camera</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://buildiful.github.io/docs/fun/01-polaroid-onestep-land-camera" /> </url>
 <url> <loc>https://buildiful.github.io/docs/fun/02-google-cardboard</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://buildiful.github.io/docs/fun/02-google-cardboard" /> </url>
+<url> <loc>https://buildiful.github.io/docs/fun/03-holga-lomography-camera</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://buildiful.github.io/docs/fun/03-holga-lomography-camera" /> </url>
 <url> <loc>https://buildiful.github.io/docs/machine-learning/01-week-01</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://buildiful.github.io/docs/machine-learning/01-week-01" /> </url>
 <url> <loc>https://buildiful.github.io/docs/robotics/01-week-01</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://buildiful.github.io/docs/robotics/01-week-01" /> </url>
 </urlset>
