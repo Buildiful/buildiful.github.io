@@ -4,10 +4,10 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        terminal: '#1c1c1c',
-        terminalBorder: '#2a2a2a',
-        accentBlue: '#e5e7eb',
-        accentRed: '#d4d4d4',
+        terminal: '#1f2933',
+        terminalBorder: '#374151',
+        accentBlue: '#67e8f9',
+        accentRed: '#fca5a5',
       },
       boxShadow: {
         soft: '0 20px 60px rgba(0,0,0,0.4)',
