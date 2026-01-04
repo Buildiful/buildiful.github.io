@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <link rel="icon" type="image/png" href="favicon.png" />
-
-  <!-- Primary Meta Tags -->
   <title>Buildiful</title>
   <meta name="title" content="Buildiful" />
   <meta name="description" content="Buildiful unlocks innovation-led development ideas for unlimited leaps. (It’s our recursive acronym!)" />
@@ -25,101 +22,194 @@
   <meta name="twitter:description" content="Buildiful unlocks innovation-led development ideas for unlimited leaps. (It’s our recursive acronym!)" />
   <meta name="twitter:image" content="https://buildiful.com/assets/buildiful_social_preview.png" />
 
-  <!-- Tailwind CSS -->
-  <link rel="stylesheet" href="assets/tailwind.css" />
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png" />
+
+  <!-- System font stack for speed -->
+  <style>
+    :root{
+      --bg:#ffffff;
+      --ink:#0b0b0b;
+      --muted:#6b6b6b;
+      --hairline:rgba(0,0,0,.08);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,Inter,Helvetica,Arial,sans-serif}
+
+    /* Layout */
+    header{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.8);backdrop-filter:saturate(1.2) blur(8px);border-bottom:1px solid var(--hairline)}
+    .nav{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 20px}
+    .brand{font-weight:600;letter-spacing:.2px}
+    .brand img {
+      max-height: 60px;   /* or 24–32px depending on taste */
+      width: auto;
+      max-width: 100%;
+      display: block;
+    }
+
+    .cta{font-weight:500;text-decoration:none;color:var(--ink);border:1px solid var(--hairline);padding:8px 14px;border-radius:999px}
+
+    main{display:block}
+    
+    section.hero{
+      place-items: start;
+      position:relative;min-height:92vh;display:grid;place-items:center;overflow:hidden;border-bottom:1px solid var(--hairline)
+    }
+    /* .hero-inner{
+      position: relative;
+      z-index: 1;
+      max-width:1200px;width:100%;padding:clamp(24px,6vw,72px)
+    } */
+    .hero-inner {
+      margin-top: 18vh;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(2px);
+      border-radius: 18px;
+
+      padding: clamp(28px, 5vw, 56px);
+      max-width: 720px;
+
+      box-shadow:
+        0 8px 24px rgba(0,0,0,0.06),
+        0 1px 2px rgba(0,0,0,0.04);
+    }
+
+    .eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+    h1{font-size:clamp(36px,6vw,72px);line-height:1.05;margin:10px 0 12px}
+    p{max-width:720px;font-size:clamp(16px,2.2vw,20px);color:#222}
+    .actions{margin-top:22px;display:flex;gap:12px;flex-wrap:wrap}
+    .primary{background:#0b0b0b;color:#fff;border-radius:999px;padding:12px 18px;text-decoration:none}
+    .secondary{border:1px solid var(--hairline);border-radius:999px;padding:12px 18px;text-decoration:none;color:var(--ink)}
+
+    /* Media */
+    .bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+
+
+    /* .veil { display: none; } */
+
+    .veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.38),rgba(255,255,255,.15) 40%,rgba(255,255,255,.35))}
+
+    /* Performance hints */
+    img{max-width:100%;height:auto;display:block}
+
+    footer{padding:40px 20px;color:var(--muted);text-align:center}
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce){.bg{transform:none}}
+  </style>
 
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-CM67WPJJW1"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag(){dataLayer.push(arguments);} 
     gtag('js', new Date());
     gtag('config', 'G-CM67WPJJW1');
   </script>
- 
 </head>
-
-<body class="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-700 text-gray-200 flex flex-col items-center">
-
-  <!-- Logo -->
-  <header class="mt-12 mb-10">
-    <img
-      src="assets/buildiful_logo.png"
-      alt="Buildiful"
-      class="h-16 mx-auto"
-    />
+<body>
+  <header>
+    <div class="nav">
+      <div class="brand"><img src="assets/buildiful_logo.png" alt="Buildiful" /></div>
+      <a class="cta" href="https://shop.buildiful.com">Shop</a>
+    </div>
   </header>
 
-  <!-- Cards container -->
-  <main class="w-full max-w-5xl px-6">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-
-      <!-- Card 1 -->
-      <div class="bg-terminal border border-terminalBorder rounded-2xl p-6 shadow-soft opacity-80">
-        <span class="inline-block text-base bg-gray-700 text-gray-200 px-3 py-1 rounded mb-4">
-          &gt;&gt; Think outside the box
-        </span>
-
-        <h2 class="text-xl font-semibold text-accentBlue mb-3">
-          Buildicle™
-        </h2>
-
-        <p class="text-sm text-gray-300 leading-relaxed mb-3">
-            Modular building components designed to encourage creative, structural
-            thinking through hands-on exploration.
-        </p>
-
+  <main>
+    <!-- Buildicles -->
+    <section class="hero" onclick="location.href='https://shop.buildiful.com'" role="link" aria-label="Buildicles">
+      <div class="bg" style="background-image:url('assets/home/buildicle_hero.png')"></div>
+      <div class="veil"></div>
+      <div class="hero-inner">
+        <div class="eyebrow">Buildicles</div>
+        <h1>Build. Connect. Discover.</h1>
+        <p>Modular pieces that turn logic and spatial thinking into playful construction.</p>
+        <div class="actions">
+          <a class="primary" href="https://shop.buildiful.com">Explore</a>
+          <a class="secondary" href="https://shop.buildiful.com">Shop</a>
+        </div>
       </div>
+    </section>
 
-      <!-- Card 2 -->
-      <div class="bg-terminal border border-terminalBorder rounded-2xl p-6 shadow-soft opacity-80">
-        <span class="inline-block text-base bg-gray-700 text-gray-200 px-3 py-1 rounded mb-4">
-          &gt;&gt; Think within the box
-        </span>
-
-        <h2 class="text-xl font-semibold text-accentRed mb-3">
-          Buildicle Puzzles
-        </h2>
-
-        <p class="text-sm text-gray-300 leading-relaxed mb-3">
-            Designed 2D and 3D puzzles built from Buildicles,
-            exploring form, and spatial reasoning
-            through focused, tactile problem-solving.
-        </p>
-        
+    <!-- Zero and Won (reference image wired) -->
+    <section class="hero" onclick="location.href='https://shop.buildiful.com'" role="link" aria-label="Zero and Won">
+      <div class="bg" style="background-image:url('assets/home/zero-and-won_hero.png')"></div>
+      <div class="veil"></div>
+      <div class="hero-inner">
+        <div class="eyebrow">Zero and Won</div>
+        <h1>Logical thinking, beautifully simple.</h1>
+        <p>A minimalist card game that makes computing fundamentals intuitive.</p>
+        <div class="actions">
+          <a class="primary" href="https://shop.buildiful.com">Learn more</a>
+        </div>
       </div>
+    </section>
 
-      <!-- Card 3 -->
-      <div class="bg-terminal border border-terminalBorder rounded-2xl p-6 shadow-soft">
-        <span class="inline-block text-base bg-gray-700 text-gray-200 px-3 py-1 rounded mb-4">
-          &gt;&gt; Think inside the box
-        </span>
-
-        <h2 class="text-xl font-semibold text-accentBlue mb-3">
-          Buildy Pi
-        </h2>
-
-        <p class="text-sm text-gray-300 leading-relaxed mb-4">
-            Raspberry Pi–based computing systems designed to run open-source software offline,
-            keeping your data local, private, and fully under your control.
-        </p>
-
-        <span class="text-xs uppercase tracking-wide text-gray-400">
-          In development
-        </span>
+    <!-- Builditty -->
+    <section class="hero" onclick="location.href='https://shop.buildiful.com'" role="link" aria-label="Builditty">
+      <div class="bg" style="background-image:url('assets/home/builditty_hero.png')"></div>
+      <div class="veil"></div>
+      <div class="hero-inner">
+        <div class="eyebrow">Builditty</div>
+        <h1>Curiosity with character.</h1>
+        <p>Playful prompts and creations that spark imagination.</p>
+        <div class="actions"><a class="primary" href="https://shop.buildiful.com">Discover</a></div>
       </div>
+    </section>
 
-    </div>
+    <!-- Addtomic -->
+    <section class="hero" onclick="location.href='https://shop.buildiful.com'" role="link" aria-label="Addtomic">
+      <div class="bg" style="background-image:url('assets/home/addtomic_hero.png')"></div>
+      <div class="veil"></div>
+      <div class="hero-inner">
+        <div class="eyebrow">Addtomic</div>
+        <h1>Small pieces. Big ideas.</h1>
+        <p>Atomic concepts, assembled through hands‑on play.</p>
+        <div class="actions"><a class="primary" href="https://shop.buildiful.com">See how</a></div>
+      </div>
+    </section>
+
+    <!-- Buildiful World -->
+    <section class="hero" onclick="location.href='https://shop.buildiful.com'" role="link" aria-label="Buildiful World">
+      <div class="bg" style="background-image:url('assets/home/buildiful-world_hero.png')"></div>
+      <div class="veil"></div>
+      <div class="hero-inner">
+        <div class="eyebrow">Buildiful World</div>
+        <h1>Build worlds together.</h1>
+        <p>Collaborative play inspired by real‑world STEAM.</p>
+        <div class="actions"><a class="primary" href="https://shop.buildiful.com">Enter</a></div>
+      </div>
+    </section>
+
+    <!-- Buildy Pi (in development) -->
+    <section class="hero" onclick="location.href='https://shop.buildiful.com'" role="link" aria-label="Buildy Pi">
+      <div class="bg" style="background-image:url('assets/home/buildy-pi_hero.png')"></div>
+      <div class="veil"></div>
+      <div class="hero-inner">
+        <div class="eyebrow">Buildy Pi</div>
+        <h1>Think inside the box.</h1>
+        <p>Computing systems designed to run open-source software offline, keeping your data local, private, and fully under your control.</p>
+        <div class="actions"><a class="secondary" href="https://shop.buildiful.com">Get updates</a></div>
+      </div>
+    </section>
   </main>
 
-  <!-- Footer -->
-  <footer class="mt-16 mb-6 text-center text-lg text-gray-400">
-    <p>© 2016 - 2026 Buildiful™</p>
-    <p class="mt-1 mx-4 opacity-70">
+  <footer>
+    <p style="margin-left:auto;margin-right:auto;">
+      © 2016 – 2026 Buildiful™
+    </p>
+    <p style="margin-top:6px;max-width:720px;margin-left:auto;margin-right:auto;opacity:.75">
       Buildiful unlocks innovation-led development ideas for unlimited leaps.
-      <span class="italic">(It’s our recursive acronym!)</span>
+      <em>(It’s our recursive acronym!)</em>
     </p>
   </footer>
-
 </body>
 </html>
