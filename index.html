@@ -33,6 +33,37 @@
       --muted:#6b6b6b;
       --hairline:rgba(0,0,0,.08);
     }
+
+    /* Thingy card backgrounds */
+    .bg-solid {
+      background: linear-gradient(180deg, #f5f7fa, #eef1f5);
+    }
+
+    .bg-ink {
+      background: linear-gradient(180deg, #0b0b0b, #1a1a1a);
+    }
+
+    .bg-soft-blue {
+      background: linear-gradient(180deg, #f0f6ff, #e6f0ff);
+    }
+
+    .bg-soft-green {
+      background: linear-gradient(180deg, #f1faf6, #e8f5ee);
+    }
+
+    .bg-soft-purple {
+      background: linear-gradient(180deg, #f6f2ff, #eee8ff);
+    }
+
+    .hero.dark {
+      color: #fff;
+    }
+
+    .hero.dark p,
+    .hero.dark .eyebrow {
+      color: rgba(255,255,255,.85);
+    }
+
     *{box-sizing:border-box}
     html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,Inter,Helvetica,Arial,sans-serif}
 
@@ -81,6 +112,33 @@
     .primary{background:#0b0b0b;color:#fff;border-radius:999px;padding:12px 18px;text-decoration:none}
     .secondary{border:1px solid var(--hairline);border-radius:999px;padding:12px 18px;text-decoration:none;color:var(--ink)}
 
+    /* Dark hero variant (no white card) */
+    .hero.dark .hero-inner {
+      margin-top: 18vh;
+      background: rgba(155,155,155,0.92);
+      backdrop-filter: blur(2px);
+      border-radius: 18px;
+
+      padding: clamp(28px, 5vw, 56px);
+      max-width: 720px;
+
+      box-shadow:
+        0 8px 24px rgba(0,0,0,0.06),
+        0 1px 2px rgba(0,0,0,0.04);
+    }
+
+    .hero.dark h1 {
+      color: #ffffff;
+    }
+
+    .hero.dark p {
+      color: rgba(225,225,225,0.85);
+    }
+
+    .hero.dark .eyebrow {
+      color: rgba(245,245,245,0.7);
+    }
+
     /* Media */
     .bg {
       position: absolute;
@@ -124,87 +182,75 @@
   </header>
 
   <main>
-    <!-- Buildicles -->
-    <section class="hero" onclick="location.href='https://shop.buildiful.com'" role="link" aria-label="Buildicles">
-      <div class="bg" style="background-image:url('assets/home/buildicle_hero.png')"></div>
-      <div class="veil"></div>
+
+    <!-- Thingy: What it is -->
+    <section class="hero bg-solid">
       <div class="hero-inner">
-        <div class="eyebrow">Buildicles</div>
-        <h1>Build. Connect. Discover.</h1>
-        <p>Modular pieces that turn logic and spatial thinking into playful construction.</p>
-        <div class="actions">
-          <a class="primary" href="https://shop.buildiful.com">Explore</a>
-          <a class="secondary" href="https://shop.buildiful.com">Shop</a>
-        </div>
+        <div class="eyebrow">Thingy</div>
+        <h1>Your physical things take up space in your brain, too.</h1>
+        <p>
+          Thingy connects physical objects to their own wiki pages.
+          Scan a tag, and instantly know what something is, where it belongs,
+          or why it matters.
+        </p>
       </div>
     </section>
 
-    <!-- Zero and Won (reference image wired) -->
-    <section class="hero" onclick="location.href='https://shop.buildiful.com'" role="link" aria-label="Zero and Won">
-      <div class="bg" style="background-image:url('assets/home/zero-and-won_hero.png')"></div>
-      <div class="veil"></div>
+    <!-- Why people want it -->
+    <section class="hero bg-soft-blue">
       <div class="hero-inner">
-        <div class="eyebrow">Zero and Won</div>
-        <h1>Logical thinking, beautifully simple.</h1>
-        <p>A minimalist card game that makes computing fundamentals intuitive.</p>
-        <div class="actions">
-          <a class="primary" href="https://shop.buildiful.com">Learn more</a>
-        </div>
+        <div class="eyebrow">Why Thingy</div>
+        <h1>More flexible than sticky notes.</h1>
+        <p>
+          Organize all your thingies with more detailed information than just
+          hand-scribbled notes — or worse yet, guesswork.
+          Update the info anytime, from anywhere, and share it with anyone who needs to know.
+        </p>
       </div>
     </section>
 
-    <!-- Builditty -->
-    <section class="hero" onclick="location.href='https://shop.buildiful.com'" role="link" aria-label="Builditty">
-      <div class="bg" style="background-image:url('assets/home/builditty_hero.png')"></div>
-      <div class="veil"></div>
+    <!-- How it works -->
+    <section class="hero bg-soft-green">
       <div class="hero-inner">
-        <div class="eyebrow">Builditty</div>
-        <h1>Curiosity with character.</h1>
-        <p>Playful prompts and creations that spark imagination.</p>
-        <div class="actions"><a class="primary" href="https://shop.buildiful.com">Discover</a></div>
+        <div class="eyebrow">How it works</div>
+        <h1>Scan. Read. Update.</h1>
+        <p>
+          Each Thingy tag links to a private or shared page.
+          No invasive tracking. No batteries.
+          Just information, exactly when you need it.
+        </p>
       </div>
     </section>
 
-    <!-- Addtomic -->
-    <section class="hero" onclick="location.href='https://shop.buildiful.com'" role="link" aria-label="Addtomic">
-      <div class="bg" style="background-image:url('assets/home/addtomic_hero.png')"></div>
-      <div class="veil"></div>
+    <!-- Philosophy -->
+    <!-- <section class="hero bg-soft-purple">
       <div class="hero-inner">
-        <div class="eyebrow">Addtomic</div>
-        <h1>Small pieces. Big ideas.</h1>
-        <p>Atomic concepts, assembled through hands‑on play.</p>
-        <div class="actions"><a class="primary" href="https://shop.buildiful.com">See how</a></div>
+        <div class="eyebrow">Built with intention</div>
+        <h1>Calm technology by default.</h1>
+        <p>
+          Thingy is designed to be lightweight, respectful,
+          and human-scaled — augmenting memory without replacing it.
+        </p>
+      </div>
+    </section> -->
+
+    <!-- Coming soon -->
+    <section class="hero bg-ink dark">
+      <div class="hero-inner">
+        <div class="eyebrow">Coming soon</div>
+        <h1>Apps launching soon.</h1>
+        <p>
+          The Thingy apps are currently in development and will be available
+          on the App Store and Google Play.
+        </p>
       </div>
     </section>
 
-    <!-- Buildiful World -->
-    <section class="hero" onclick="location.href='https://shop.buildiful.com'" role="link" aria-label="Buildiful World">
-      <div class="bg" style="background-image:url('assets/home/buildiful-world_hero.png')"></div>
-      <div class="veil"></div>
-      <div class="hero-inner">
-        <div class="eyebrow">Buildiful World</div>
-        <h1>Build worlds together.</h1>
-        <p>Collaborative play inspired by real‑world STEAM.</p>
-        <div class="actions"><a class="primary" href="https://shop.buildiful.com">Enter</a></div>
-      </div>
-    </section>
-
-    <!-- Buildy Pi (in development) -->
-    <section class="hero" onclick="location.href='https://shop.buildiful.com'" role="link" aria-label="Buildy Pi">
-      <div class="bg" style="background-image:url('assets/home/buildy-pi_hero.png')"></div>
-      <div class="veil"></div>
-      <div class="hero-inner">
-        <div class="eyebrow">Buildy Pi</div>
-        <h1>Think inside the box.</h1>
-        <p>Computing systems designed to run open-source software offline, keeping your data local, private, and fully under your control.</p>
-        <div class="actions"><a class="secondary" href="https://shop.buildiful.com">Get updates</a></div>
-      </div>
-    </section>
   </main>
 
   <footer>
     <p style="margin-left:auto;margin-right:auto;">
-      © 2016 – 2026 Buildiful™
+      © 2016 – 2026 Buildiful®
     </p>
     <p style="margin-top:6px;max-width:720px;margin-left:auto;margin-right:auto;opacity:.75">
       Buildiful unlocks innovation-led development ideas for unlimited leaps.
