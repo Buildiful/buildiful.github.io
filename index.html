@@ -1,479 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <!-- Primary Meta -->
   <title>Buildiful</title>
+  <meta name="title" content="Buildiful">
   <meta name="description" content="Buildiful unlocks innovation-led development ideas for unlimited leaps." />
 
-  <link rel="icon" type="image/png" href="favicon.png" />
+  <!-- Open Graph / Facebook / LinkedIn -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://buildiful.com/">
+  <meta property="og:title" content="Buildiful">
+  <meta property="og:description" content="Buildiful unlocks innovation-led development ideas for unlimited leaps.">
+  <meta property="og:image" content="https://buildiful.com/assets/buildiful_social_preview.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
 
-  <style>
-    :root{
-      --bg:#ffffff;
-      --ink:#0b0b0b;
-      --muted:#6b6b6b;
-      --hairline:rgba(0,0,0,.08);
-    }
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://buildiful.com/">
+  <meta property="twitter:title" content="Buildiful">
+  <meta property="twitter:description" content="Buildiful unlocks innovation-led development ideas for unlimited leaps.">
+  <meta property="twitter:image" content="https://buildiful.com/assets/buildiful_social_preview.png">
 
-    *{box-sizing:border-box}
-    html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,Inter,Helvetica,Arial,sans-serif}
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    /* Header */
-    header{
-      position:sticky;top:0;z-index:10;
-      background:rgba(255,255,255,.85);
-      backdrop-filter:saturate(1.2) blur(8px);
-      border-bottom:1px solid var(--hairline)
-    }
-    .nav{
-      max-width:1200px;margin:0 auto;
-      display:flex;align-items:center;justify-content:space-between;
-      padding:14px 20px
-    }
-    .brand img{max-height:56px}
-    .header-button {
-      letter-spacing: 0.08em;
-      text-decoration:none;
-      color:#0b0b0b;
-      border:1px solid rgba(0,0,0,.08);
-      padding:10px 16px 10px 18px;
-      border-radius:999px;
-      font-weight:600;
-      background:#ffffff;
-      box-shadow:0 6px 16px rgba(0,0,0,.08);
-    }
-    .cta{
-      text-decoration:none;
-      color:#0b0b0b;
-      border:1px solid rgba(0,0,0,.08);
-      padding:10px 18px;
-      border-radius:999px;
-      font-weight:500;
-      background:#ffffff;
-      box-shadow:0 6px 16px rgba(0,0,0,.08);
-    }
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CM67WPJJW1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-    .cta.primary{
-      background:#0b0b0b;
-      color:#ffffff;
-      border-color:#0b0b0b;
-      box-shadow:0 10px 24px rgba(0,0,0,.18);
-    }
-
-    /* .cta{
-      text-decoration:none;color:var(--ink);
-      border:1px solid var(--hairline);
-      padding:8px 14px;border-radius:999px
-    } */
-
-    /* Hero sections */
-    section.hero{
-      position:relative;min-height:92vh;
-      display:grid;align-items:center;
-      border-bottom:1px solid var(--hairline)
-    }
-
-    .bg-solid{background:linear-gradient(180deg,#f5f7fa,#eef1f5)}
-    .bg-soft-blue{background:linear-gradient(180deg,#f0f6ff,#e6f0ff)}
-    .bg-soft-green{background:linear-gradient(180deg,#f1faf6,#e8f5ee)}
-
-    /* Core content container */
-    .hero-inner{
-      margin:0 auto;
-      padding:clamp(32px,6vw,72px);
-      background:rgba(255,255,255,.92);
-      border-radius:22px;
-      box-shadow:0 8px 24px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04)
-    }
-
-    /* Variants */
-    .hero-inner.narrow{max-width:720px}
-    .hero-inner.wide{max-width:1100px}
-
-    /* Typography */
-    .eyebrow{
-      font-size:12px;letter-spacing:.14em;text-transform:uppercase;
-      color:var(--muted);margin-bottom:6px
-    }
-    h1{font-size:clamp(36px,6vw,72px);line-height:1.05;margin:0 0 14px}
-    p {
-      font-size: clamp(16px, 2.2vw, 20px);
-      color: #333;
-      max-width: 640px;
-      line-height: 1.6; /* ← add this */
-    }
-
-
-    /* Split hero */
-    .hero-split{
-      display:grid;grid-template-columns:1.1fr .9fr;
-      gap:clamp(32px,6vw,72px);
-      align-items:center
-    }
-    .hero-illustration{max-width:420px;margin:auto}
-    .hero-illustration svg{width:100%;height:auto}
-
-    @media(max-width:900px){
-      .hero-split{grid-template-columns:1fr}
-      .hero-illustration{margin-top:32px}
-    }
-
-    /* Present */
-    .present-gradient{
-      background:linear-gradient(135deg,#d1e8e2 0%,#c7dcef 60%,#dfe7f5 100%)
-    }
-    .veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.35),rgba(255,255,255,.15) 40%,rgba(255,255,255,.35))}
-
-    footer{padding:40px 20px;text-align:center;color:var(--muted)}
-
-    footer p {
-      margin-left: auto;
-      margin-right: auto;
-    }
-  </style>
+    gtag('config', 'G-CM67WPJJW1');
+  </script>
 </head>
 <body>
 
-<header>
-  <div class="nav">
-    <div class="brand"><img src="assets/buildiful_logo.png" alt="Buildiful"></div>
-    <a class="header-button" href="https://thingy.is">Thingy</a>
+<header class="nav">
+  <div class="container nav-inner">
+    <img src="assets/buildiful_logo.png" alt="Buildiful Logo" class="logo-img"/>
+    <div class="nav-links">
+      <a href="https://buildiful.io">Machines</a>
+      <a href="https://thingy.is">Thingy</a>
+    </div>
   </div>
 </header>
 
-<main>
+<section class="hero-main">
+  <div class="container center">
+    <h1>We Build Systems for the Intelligence Era</h1>
+    <p class="sub">
+      High-performance machines.<br/>
+      Smart connected objects.<br/><br/>
+      One ecosystem • Limitless possibilities
+    </p>
+  </div>
+</section>
 
-  <!-- Thingy: What it is -->
-
-  <section class="hero present-gradient">
-  <!-- <section class="hero bg-solid"> -->
-    <!-- <div class="veil"></div> -->
-    <div class="hero-inner wide hero-split">
-      <div>
-        <div class="eyebrow">Thingy</div>
-        <h1>Your physical things take up space in your brain, too.</h1>
-        <p>
-          Thingy™ connects physical objects to their own wiki pages.
-          Scan a tag, and instantly know what something is, where it belongs,
-          or why it matters.
-        </p>
-        <p>
-          It's a smart labeling tool we also use and love.
-        </p>
-        <div style="margin-top:36px">
-          <a class="cta primary" href="https://thingy.is">Explore Thingy →</a>
-        </div>
-
-      </div>
-      <div class="hero-illustration">
-        <svg viewBox="0 0 360 240" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- physical tag (circular) -->
-          <circle cx="56" cy="120" r="26" fill="#e6edf5" stroke="#c7d2e3"/>
-          <circle cx="56" cy="120" r="4" fill="#c7d2e3"/>
-
-          <!-- clean scan waves -->
-          <circle cx="56" cy="120" r="40" stroke="#b7cde8" stroke-width="2" opacity="0.5"/>
-          <circle cx="56" cy="120" r="54" stroke="#b7cde8" stroke-width="2" opacity="0.25"/>
-
-          <!-- arrow -->
-          <path d="M120 120 H172" stroke="#b7cde8" stroke-width="2" stroke-dasharray="4 4"/>
-          <path d="M172 120 l-6 -6 M172 120 l-6 6" stroke="#b7cde8" stroke-width="2"/>
-
-          <!-- digital page -->
-          <rect x="184" y="44" width="140" height="152" rx="20" fill="#ffffff" stroke="#c7d2e3"/>
-          <rect x="208" y="72" width="92" height="10" rx="5" fill="#c7d2e3"/>
-          <rect x="208" y="96" width="72" height="10" rx="5" fill="#dfe7f5"/>
-          <rect x="208" y="120" width="84" height="10" rx="5" fill="#e6f0ff"/>
-        </svg>
-      </div>
+<section id="machines" class="product dark">
+  <div class="container split">
+    <div class="text">
+      <div class="label">Flagship</div>
+      <h2>Buildiful Machines</h2>
+      <p>
+        AI workstations engineered for builders,
+        solopreneurs, and automation-first teams.
+      </p>
+      <a class="btn" href="https://buildiful.io">Configure Yours</a>
     </div>
-  </section>
-
-    <!-- Second brain -->
-  <section class="hero bg-solid">
-    <div class="hero-inner wide hero-split">
-      <div>
-        <div class="eyebrow">Second brain</div>
-        <h1>A second brain for your thingies.</h1>
-        <p>
-          Thingy helps you offload the small mental notes tied to physical objects —
-          what something is, how to use it, who it’s for, and when it matters.
-        </p>
-        <p>
-          The information stays with the object, instead of floating around in
-          your head, notes app, or camera roll.
-        </p>
-      </div>
-
-      <div class="hero-illustration">
-        <svg viewBox="0 0 360 360" xmlns="http://www.w3.org/2000/svg" fill="none">
-
-          <!-- cloud-brain outline -->
-          <path
-            d="
-              M110 150
-              C78 150 56 128 56 104
-              C56 80 74 62 98 62
-              C106 38 132 22 162 22
-              C192 22 218 38 226 62
-              C254 62 276 82 276 108
-              C276 134 254 154 226 154
-              L190 154
-              L170 178
-              L168 178
-              L148 154
-              Z
-            "
-            fill="#efc4bd"
-            stroke="#c7d2e3"
-            stroke-width="2"
-            stroke-linejoin="round"
-          />
-
-          <!-- arrow (downward from triangle tip) -->
-          <path
-            d="M169 178 V212"
-            stroke="#b7cde8"
-            stroke-width="2"
-            stroke-dasharray="4 4"
-          />
-          <path
-            d="M169 212 l-6 -6 M169 212 l6 -6"
-            stroke="#b7cde8"
-            stroke-width="2"
-          />
-
-          <!-- object page (moved underneath) -->
-          <rect
-            x="120"
-            y="204"
-            width="98"
-            height="112"
-            rx="16"
-            fill="#ffffff"
-            stroke="#c7d2e3"
-            stroke-width="2"
-          />
-          <rect x="138" y="250" width="62" height="10" rx="5" fill="#c7d2e3"/>
-          <rect x="138" y="272" width="46" height="10" rx="5" fill="#dfe7f5"/>
-          <rect x="138" y="294" width="54" height="10" rx="5" fill="#e6f0ff"/>
-
-        </svg>
-        
-      </div>
+    <div class="visual">
+      <img src="assets/Buildiful_Machines_Hero.webp" class="hero-img"/>
     </div>
-  </section>
+  </div>
+</section>
 
-    <!-- Why Thingy -->
-  <section class="hero bg-soft-blue">
-    <div class="hero-inner wide hero-split">
-      <div>
-        <div class="eyebrow">Why Thingy</div>
-        <h1>More flexible than sticky notes.</h1>
-        <p>
-          Organize all your thingies with more detailed information than just
-          hand‑scribbled notes — or worse yet, guesswork. Update the info anytime,
-          from anywhere, and share it with anyone who needs to know.
-        </p>
-      </div>
-      <div class="hero-illustration">
-        <svg viewBox="0 0 360 240" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- messy notes -->
-          <g opacity="0.9">
-            <rect x="40" y="70" width="70" height="70" rx="10" fill="#fff3b0" transform="rotate(-6 40 70)"/>
-            <rect x="70" y="90" width="70" height="70" rx="10" fill="#ffe08a" transform="rotate(4 70 90)"/>
-            <rect x="55" y="115" width="70" height="70" rx="10" fill="#ffefc1" transform="rotate(-2 55 115)"/>
-          </g>
-
-          <!-- arrow -->
-          <path d="M160 120 H220" stroke="#b7cde8" stroke-width="2" stroke-dasharray="4 4"/>
-          <path d="M220 120 l-6 -6 M220 120 l-6 6" stroke="#b7cde8" stroke-width="2"/>
-
-          <!-- clean page -->
-          <rect x="230" y="50" width="100" height="140" rx="18" fill="#ffffff" stroke="#c7dcef"/>
-          <rect x="250" y="78" width="60" height="10" rx="5" fill="#c7dcef"/>
-          <rect x="250" y="100" width="48" height="10" rx="5" fill="#dfe7f5"/>
-          <rect x="250" y="122" width="54" height="10" rx="5" fill="#e6f0ff"/>
-        </svg>
-      </div>
+<section id="thingy" class="product light">
+  <div class="container split reverse">
+    <div class="text">
+      <div class="label">Internet of Thingies</div>
+      <h2>Thingy</h2>
+      <p>
+        A second brain for the physical world.
+        NFC-powered smart labels to offload trivial mental notes.
+      </p>
+      <a class="btn" href="https://thingy.is">Explore Thingy</a>
     </div>
-  </section>
-
-  <!-- How it works -->
-  <section class="hero bg-soft-green">
-    <div class="hero-inner wide hero-split">
-      <div>
-        <div class="eyebrow">How it works</div>
-        <h1>Scan. Read. Update.</h1>
-        <p>
-          Each Thingy tag links to a page with clear, intentional visibility:
-          <br><br>
-          <strong>Private</strong> — only you can see it<br>
-        <strong>Shared</strong> — visible to selected people<br>
-        <strong>Public</strong> — accessible to anyone with the tag or link<br>
-        <strong>Embargoed</strong> — hidden until a date you choose
-          <br><br>
-          No invasive tracking. No batteries. Just the right information, at the
-          right time.
-        </p>
-      </div>
-      <div class="hero-illustration">
-        <svg viewBox="0 0 320 240" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- central page -->
-          <rect x="110" y="70" width="100" height="100" rx="18" fill="#ffffff" stroke="#9ccbb3"/>
-
-          <!-- connectors -->
-          <path d="M110 120 H82" stroke="#9ccbb3" stroke-dasharray="4 4"/>
-          <path d="M160 70 V52" stroke="#9ccbb3" stroke-dasharray="4 4"/>
-          <path d="M210 120 H238" stroke="#9ccbb3" stroke-dasharray="4 4"/>
-          <path d="M160 170 V188" stroke="#9ccbb3" stroke-dasharray="4 4"/>
-
-          <!-- icons -->
-          <g stroke="#6fae94" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-            <!-- lock -->
-            <rect x="48" y="110" width="28" height="22" rx="5"/>
-            <path d="M54 110 v-6 a8 8 0 0 1 16 0 v6"/>
-
-            <!-- shared (two distinct heads + shoulders) -->
-            <circle cx="150" cy="26" r="6"/>
-            <circle cx="170" cy="26" r="6"/>
-            <path d="M142 40 c4-6 16-6 20 0"/>
-            <path d="M162 40 c4-6 16-6 20 0"/>
-
-            <!-- globe (complete meridians) -->
-            <circle cx="260" cy="120" r="14"/>
-            <ellipse cx="260" cy="120" rx="6" ry="14"/>
-            <path d="M246 120 h28"/>
-
-            <!-- clock -->
-            <circle cx="160" cy="210" r="14"/>
-            <path d="M160 210 v-7"/>
-            <path d="M160 210 h6"/>
-          </g>
-        </svg>
-      </div>
-
-      <div style="margin-top:2px">
-        <a class="cta primary" href="https://thingy.is">Try Thingy →</a>
-      </div>
+    <div class="visual">
+      <img src="assets/Buildiful_Thingy_Hero.webp" class="hero-img"/>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- What are Ineffables -->
-  <section class="hero bg-solid">
-    <div class="hero-inner wide hero-split">
-      <div>
-        <div class="eyebrow">The interface</div>
-        <h1>Ineffables</h1>
-        <p>
-          Ineffables are small tap-to-scan tags that connect physical objects to
-          their pages in Thingy.
-        </p>
-        <p>
-          They stay quiet unless you tap them.
-        </p>
-        <p>
-          And even then, they simply open the right page,
-          at the right time.
-        </p>
-      </div>
+<section id="ecosystem" class="ecosystem">
+  <div class="container center">
+    <h2>Your Ecosystem</h2>
+    <p>
+      Machines power intelligent workflows.<br/>
+      Thingy connects your physical world.<br/>
+      Together, they expand your universe.
+    </p>
+  </div>
+</section>
 
-      <div class="hero-illustration">
-        <svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" fill="none">
-          <!-- row 1 -->
-          <circle cx="60"  cy="60"  r="18" fill="#E08A7C" stroke="#c7d2e3"/>
-          <circle cx="120" cy="60"  r="18" fill="#e6e6e6" stroke="#c7d2e3"/>
-          <circle cx="180" cy="60"  r="18" fill="#e6e6e6" stroke="#c7d2e3"/>
-
-          <!-- row 2 -->
-          <circle cx="60"  cy="120" r="18" fill="#e6e6e6" stroke="#c7d2e3"/>
-          <circle cx="120" cy="120" r="18" fill="#e6e6e6" stroke="#c7d2e3"/>
-          <circle cx="180" cy="120" r="18" fill="#e6e6e6" stroke="#c7d2e3"/>
-
-          <!-- row 3 -->
-          <circle cx="60"  cy="180" r="18" fill="#e6e6e6" stroke="#c7d2e3"/>
-          <circle cx="120" cy="180" r="18" fill="#e6e6e6" stroke="#c7d2e3"/>
-          <circle cx="180" cy="180" r="18" fill="#e6e6e6" stroke="#c7d2e3"/>
-        </svg>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- More than tags -->
-  <section class="hero bg-soft-blue">
-    <div class="hero-inner wide hero-split">
-      <div>
-        <div class="eyebrow">System, not stickers</div>
-        <h1>More than just NFC tags.</h1>
-        <p>
-          Ineffables are the interface — the value lives in the system behind them.
-        </p>
-        <p>
-          Structured pages, permission controls, sharing, and future-dated access
-          are what make information stay useful over time.
-        </p>
-      </div>
-
-      <div class="hero-illustration">
-        <svg viewBox="0 0 360 240" xmlns="http://www.w3.org/2000/svg" fill="none">
-          <!-- tag -->
-          <circle cx="70" cy="120" r="24" fill="#e6edf5" stroke="#c7d2e3"/>
-
-          <!-- arrow -->
-          <path d="M110 120 H160" stroke="#b7cde8" stroke-dasharray="4 4"/>
-          <path d="M160 120 l-6 -6 M160 120 l-6 6" stroke="#b7cde8"/>
-
-          <!-- system box -->
-          <rect x="172" y="52" width="148" height="136" rx="20"
-                fill="#ffffff" stroke="#c7d2e3"/>
-          <rect x="196" y="80" width="100" height="10" rx="5" fill="#c7d2e3"/>
-          <rect x="196" y="104" width="80" height="10" rx="5" fill="#dfe7f5"/>
-          <rect x="196" y="128" width="92" height="10" rx="5" fill="#e6f0ff"/>
-        </svg>
-      </div>
-    </div>
-  </section>
-
-  <!-- Permission safety -->
-  <section class="hero bg-soft-green">
-    <div class="hero-inner wide hero-split">
-      <div>
-        <div class="eyebrow">Permission-aware</div>
-        <h1>Shared only when you mean to.</h1>
-        <p>
-          If someone taps an Ineffable without permission, they won’t see anything
-          you haven’t chosen to share.
-        </p>
-        <p>
-          Thingy is private by default, with clear controls over who sees what — and when.
-        </p>
-      </div>
-
-      <div class="hero-illustration">
-        <svg viewBox="0 0 360 240" xmlns="http://www.w3.org/2000/svg" fill="none">
-          <!-- shield -->
-          <path d="M180 40 l80 24 v56c0 48-34 72-80 88-46-16-80-40-80-88V64l80-24z"
-                fill="#f1faf6" stroke="#9ccbb3"/>
-
-          <!-- lock -->
-          <rect x="156" y="108" width="48" height="36" rx="8"
-                stroke="#6fae94" fill="none"/>
-          <path d="M168 108 v-12a12 12 0 0 1 24 0v12"
-                stroke="#6fae94" fill="none"/>
-        </svg>
-      </div>
-    </div>
-  </section>
-
-</main>
-
-<footer>
-  <p>© 2016 – 2026 Buildiful®</p>
-  <p style="font-size:14px;opacity:.65">Buildiful unlocks innovation‑led development ideas for unlimited leaps.</p>
-  <p style="font-size:13px;opacity:.60"><em>(It’s our recursive acronym!)</em></p>
+<footer class="footer">
+  <div class="container footer-inner">
+    <p>© 2016 – 2026 Buildiful®</p>
+    <p style="font-size:14px;opacity:.65">Buildiful unlocks innovation‑led development ideas for unlimited leaps.</p>
+    <p style="font-size:13px;opacity:.60"><em>(It’s our recursive acronym!)</em></p>
+  </div>
 </footer>
 
 </body>
