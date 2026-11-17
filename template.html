@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#152e47">
+  <meta name="description" content="Buildiful 365 — one free, open-source tool a day. Explore tools for creating, publishing, designing, and playing. No accounts, ads, or subscriptions.">
+  <meta name="color-scheme" content="light">
+  <link rel="canonical" href="https://buildiful.github.io/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Buildiful 365">
+  <meta property="og:title" content="Buildiful 365 — One Free Tool a Day">
+  <meta property="og:description" content="Free tools for a more creative, open web. One new release every day, built by Buildiful®.">
+  <meta property="og:url" content="https://buildiful.github.io/">
+  <meta name="twitter:card" content="summary">
+  <title>Buildiful 365 — One Free Tool a Day</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="https://raw.githubusercontent.com/Buildiful/music-player/main/assets/favicon-32x32.png">
+  <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/Buildiful/music-player/main/assets/apple-touch-icon.png">
+  <link rel="alternate" type="application/rss+xml" title="Buildiful 365 releases" href="./feed.xml">
+  <link rel="stylesheet" href="./styles.css">
+  <script defer src="./analytics-consent.js" data-measurement-id="G-TG14RBXLTF" data-tool-name="Buildiful 365" data-privacy-url="./privacy.html"></script>
+  <script defer src="./app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#tools">Skip to tools</a>
+  <header class="site-header" id="top">
+    <div class="container header-inner">
+      <a class="brand" href="./" aria-label="Buildiful 365 home">
+        <span class="brand-word" aria-hidden="true">Buildiful®</span>
+        <img class="brand-image" src="./assets/buildiful-logo-white.png" alt="" width="140" height="34" onload="this.classList.add('is-ready');this.previousElementSibling.hidden=true" onerror="if(!this.dataset.retry){this.dataset.retry='1';this.src='https://raw.githubusercontent.com/Buildiful/music-player/main/assets/buildiful-logo-white.png'}else{this.remove()}">
+        <span class="brand-line" aria-hidden="true"></span>
+        <span class="brand-365">365</span>
+      </a>
+      <nav class="main-nav" aria-label="Main navigation">
+        <a class="nav-selected" href="#tools">Explore tools</a>
+        <a href="#about">About</a>
+        <a class="nav-github" href="https://github.com/Buildiful" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero-float hero-float-1"></div><div class="hero-float hero-float-2"></div>
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="live-dot"></span> BUILDIFUL 365 <span class="eyebrow-separator">/</span> ONE FREE TOOL A DAY</div>
+          <h1 id="hero-heading">Good things<br>are <span class="hero-highlight">built</span> to share.</h1>
+          <p class="hero-description">Meet a growing collection of free, open-source tools for making, learning, publishing, and playing. Made by Buildiful®. Made for everyone.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#tools">Explore all tools <span aria-hidden="true">↗</span></a>
+            <a class="button button-text" href="#about">Why we're building this <span aria-hidden="true">→</span></a>
+          </div>
+          <div class="hero-notes"><span><span class="note-check" aria-hidden="true">✓</span> Free to use</span><span><span class="note-check" aria-hidden="true">✓</span> Open source</span><span><span class="note-check" aria-hidden="true">✓</span> No ads</span></div>
+        </div>
+        <div class="latest-panel" aria-label="Latest released tool">
+          <div class="latest-top"><span class="latest-pill"><span class="latest-pulse"></span> LATEST RELEASE</span><span class="latest-day">DAY {{LATEST_DAY}}</span></div>
+          <div class="latest-art latest-art-{{LATEST_KIND}}" aria-hidden="true">{{LATEST_ARTWORK}}</div>
+          <div class="latest-copy"><span class="latest-meta">FRESH FROM THE WORKSHOP</span><h2>{{LATEST_NAME}}</h2><p>{{LATEST_DESC}}</p>
+            <a href="{{LATEST_URL}}" target="_blank" rel="noopener noreferrer" class="latest-link" data-track-tool="{{LATEST_SLUG}}">Try {{LATEST_NAME}} <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="marquee-strip" aria-label="Our commitment">
+      <div class="container strip-inner"><span><strong>{{COUNT_PADDED}}</strong> tools released</span><span class="strip-star">✳</span><span><strong>365</strong> tools planned</span><span class="strip-star">✳</span><span>Created to be shared. Free to explore.</span><span class="strip-star strip-star-last">✳</span><span class="strip-extra">Built with curiosity.</span></div>
+    </div>
+
+    <section class="tools-section" id="tools" aria-labelledby="tools-heading">
+      <div class="container">
+        <div class="section-intro"><div><div class="section-kicker">THE FREE TOOL COLLECTION <span class="section-spark">✳</span> {{COUNT}} LIVE</div>
+          <h2 id="tools-heading">Find your next <em>spark.</em></h2>
+          <p>There is something new to try every day. Start anywhere.</p></div>
+          <a href="./feed.xml" class="rss-link">Follow releases via RSS <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="tool-controls">
+          <div class="category-tabs" role="group" aria-label="Filter tools by category">
+            <button class="tab active" data-category="all" type="button" aria-pressed="true">All tools <span>{{COUNT}}</span></button>
+            <button class="tab" data-category="Create" type="button" aria-pressed="false">Create</button>
+            <button class="tab" data-category="Publish" type="button" aria-pressed="false">Publish</button>
+            <button class="tab" data-category="Enjoy" type="button" aria-pressed="false">Enjoy</button>
+          </div>
+          <div class="search-wrap"><label for="search" class="sr-only">Search free tools</label><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.2"></circle><path d="m15.5 15.5 5 5"></path></svg><input type="search" id="search" placeholder="Search the tools..." autocomplete="off"></div>
+        </div>
+        <div class="result-bar"><p id="result-count" aria-live="polite">Showing all {{COUNT}} tools</p><label class="sort-wrap">Sort <select id="sort"><option value="newest">Newest first</option><option value="oldest">Oldest first</option><option value="name">A to Z</option></select></label></div>
+        <div class="tools-grid" id="tool-grid">
+          <!-- GENERATED TOOL CARDS: edit tools.json, not this section -->
+          {{TOOL_CARDS}}
+        </div>
+        <div id="empty-state" class="empty-state" hidden><span aria-hidden="true">✳</span><h3>No tools found (yet).</h3><p>Try a different search or browse the full collection.</p><button type="button" id="reset-filters">Show all tools</button></div>
+        <p class="collection-end">Just the beginning. <span>More tools are on the way.</span> <span aria-hidden="true">✳</span></p>
+      </div>
+    </section>
+
+    <section class="about" id="about" aria-labelledby="about-heading">
+      <div class="container about-inner">
+        <div class="about-left"><div class="section-kicker">WHY BUILDIFUL 365?</div><h2 id="about-heading">The more we make,<br>the more we <em>share.</em></h2></div>
+        <div class="about-right"><p>We believe useful tools should be within everyone's reach. So we're releasing one free tool each day for 365 days — small, practical things that help you build something of your own.</p><p>No accounts, subscriptions, or advertising. The code is open for you to explore, learn from, and improve, subject to each project's license.</p><a href="https://buildiful.com/" target="_blank" rel="noopener noreferrer">Meet Buildiful® <span aria-hidden="true">↗</span></a></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div class="container footer-main"><div><a href="#top" class="footer-brand">Buildiful<span>®</span> <span class="footer-number">365</span></a><p>One free tool a day. Open possibilities for all.</p></div><div class="footer-nav"><a href="#tools">All tools</a><a href="https://github.com/Buildiful" target="_blank" rel="noopener noreferrer">GitHub</a><a href="https://buildiful.com/" target="_blank" rel="noopener noreferrer">Buildiful.com</a><a href="./privacy.html">Privacy</a><button type="button" id="analytics-settings">Analytics settings</button></div></div><div class="container footer-bottom"><span>© 2026 Buildiful®. All rights reserved for brand assets.</span><span>Designed to be useful. Built to be shared. <span class="footer-heart">♥</span></span></div></footer>
+</body>
+</html>

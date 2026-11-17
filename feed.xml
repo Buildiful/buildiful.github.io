@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"><channel>
+  <title>Buildiful 365 — One Free Tool a Day</title>
+  <link>https://buildiful.github.io/</link>
+  <description>New free, open-source tools from Buildiful®.</description>
+  <language>en-us</language>
+    <item><title>Music Player — Day 005</title><link>https://buildiful.github.io/music-player/</link><guid isPermaLink="true">https://buildiful.github.io/music-player/</guid><description>Play and organize your own music library in the browser, including offline after setup.</description><pubDate>Tue, 17 Nov 2026 00:00:00 GMT</pubDate></item>
+    <item><title>Font Builder — Day 004</title><link>https://buildiful.github.io/font-builder/</link><guid isPermaLink="true">https://buildiful.github.io/font-builder/</guid><description>Draw or upload your own characters and turn them into an installable font.</description><pubDate>Mon, 16 Nov 2026 00:00:00 GMT</pubDate></item>
+    <item><title>GIF Builder — Day 003</title><link>https://buildiful.github.io/gif-builder/</link><guid isPermaLink="true">https://buildiful.github.io/gif-builder/</guid><description>Make animated GIFs from your images or build them frame by frame.</description><pubDate>Sun, 15 Nov 2026 00:00:00 GMT</pubDate></item>
+    <item><title>Card Builder — Day 002</title><link>https://buildiful.github.io/card-builder/</link><guid isPermaLink="true">https://buildiful.github.io/card-builder/</guid><description>Design and export custom cards, announcements, and graphics for any occasion.</description><pubDate>Sat, 14 Nov 2026 00:00:00 GMT</pubDate></item>
+    <item><title>Book Builder — Day 001</title><link>https://buildiful.github.io/book-builder/</link><guid isPermaLink="true">https://buildiful.github.io/book-builder/</guid><description>Turn your manuscript into publish-ready paperback files, complete with interior pages and a cover.</description><pubDate>Fri, 13 Nov 2026 00:00:00 GMT</pubDate></item>
+</channel></rss>

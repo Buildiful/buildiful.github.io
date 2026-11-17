@@ -1,0 +1,80 @@
+[
+  {
+    "day": 1,
+    "date": "2026-11-13",
+    "name": "Book Builder",
+    "slug": "book-builder",
+    "category": "Publish",
+    "kind": "book",
+    "desc": "Turn your manuscript into publish-ready paperback files, complete with interior pages and a cover.",
+    "tags": [
+      "books",
+      "writing",
+      "publishing",
+      "paperback",
+      "PDF"
+    ]
+  },
+  {
+    "day": 2,
+    "date": "2026-11-14",
+    "name": "Card Builder",
+    "slug": "card-builder",
+    "category": "Create",
+    "kind": "card",
+    "desc": "Design and export custom cards, announcements, and graphics for any occasion.",
+    "tags": [
+      "cards",
+      "design",
+      "social",
+      "PNG",
+      "SVG"
+    ]
+  },
+  {
+    "day": 3,
+    "date": "2026-11-15",
+    "name": "GIF Builder",
+    "slug": "gif-builder",
+    "category": "Create",
+    "kind": "gif",
+    "desc": "Make animated GIFs from your images or build them frame by frame.",
+    "tags": [
+      "animation",
+      "images",
+      "GIF",
+      "frames"
+    ]
+  },
+  {
+    "day": 4,
+    "date": "2026-11-16",
+    "name": "Font Builder",
+    "slug": "font-builder",
+    "category": "Create",
+    "kind": "font",
+    "desc": "Draw or upload your own characters and turn them into an installable font.",
+    "tags": [
+      "typography",
+      "type",
+      "TrueType",
+      "TTF"
+    ]
+  },
+  {
+    "day": 5,
+    "date": "2026-11-17",
+    "name": "Music Player",
+    "slug": "music-player",
+    "category": "Enjoy",
+    "kind": "music",
+    "desc": "Play and organize your own music library in the browser, including offline after setup.",
+    "tags": [
+      "audio",
+      "songs",
+      "music",
+      "playlists",
+      "offline"
+    ]
+  }
+]
