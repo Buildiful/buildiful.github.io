@@ -1,63 +1,70 @@
 # Buildiful 365 — Homepage
 
-The public hub for [Buildiful 365](https://buildiful.github.io/), a collection of free, open-source tools built by Buildiful®.
+The public hub for [Buildiful 365](https://buildiful.github.io/): a growing collection of free, open-source tools from Buildiful®.
 
-## Contents
+## What is included
 
-- `index.html` — generated, fully readable static homepage; cards work without JavaScript.
-- `template.html` — homepage layout used by the generator.
-- `tools.json` — single source of truth for the catalog. **Edit this to add daily releases.**
-- `build.py` — standard Python only; generates `index.html`, `feed.xml`, and `sitemap.xml`.
-- `styles.css`, `app.js` — responsive styling and optional search/category/sort enhancements.
-- `analytics-consent.js`, `privacy.html` — consent-based analytics; no GA4 before opt-in.
-- `fetch-brand-assets.sh` — optional one-time download of the official Buildiful logo and favicon into `assets/`.
-- `.nojekyll`, `.gitignore`, `LICENSE`, `TRADEMARKS.md`, `QA_CHECKLIST.md` — public repository basics.
+- `tools.json` — source of truth for the release catalog.
+- `build.py` — Python standard library only; builds the static homepage, RSS feed and sitemap.
+- `template.html` — homepage layout for the generator.
+- `index.html`, `feed.xml`, `sitemap.xml` — generated, committed output for GitHub Pages.
+- `styles.css`, `app.js` — responsive styling, accessible filters, search and sorting.
+- `assets/tools/` — optional unique tool artwork files referenced from `tools.json`.
+- `assets/` — official Buildiful® logo and favicon set.
+- `analytics-consent.js`, `privacy.html` — consent-based optional GA4.
+- `LICENSE`, `TRADEMARKS.md`, `QA_CHECKLIST.md`, `.gitignore`, `.nojekyll` — public repository support files.
 
-## First launch at buildiful.github.io
+The site is static. There is no npm, backend, database, or API key to deploy. All release cards appear in generated HTML even with JavaScript disabled.
 
-1. From the **Buildiful GitHub organization**, create a **public** repository named `buildiful.github.io` (exact name). Its URL should be `https://github.com/Buildiful/buildiful.github.io`. A user/organization Pages repository with this name serves the root address `https://buildiful.github.io/`.
-2. Extract this ZIP. Optionally run `bash fetch-brand-assets.sh` once to put official brand files into `assets/`, avoiding remote logo loading. The homepage already has a fallback to the official logo in the public `music-player` repository if the local logo is not copied. The favicon and Apple touch icon currently link to that public repository regardless of whether you copy them; you can change the two `<link>` tags in `template.html` and `privacy.html` to local paths if desired, then rerun `build.py`.
-3. Commit all project contents to `main` (including hidden `.nojekyll` and `.gitignore`). **Do not put files inside an extra enclosing folder.**
-4. In repository **Settings → Pages → Build and deployment**, choose **Deploy from a branch**, branch `main`, folder `/ (root)`. Save.
-5. When the deployment finishes, visit `https://buildiful.github.io/` and click through the five tools. Check mobile layout, search, privacy, and analytics consent.
+## Preview locally
 
-There is no npm, backend, database, or API key to deploy the site. The repository source is public; do not commit passwords or secrets.
+From the extracted folder, run:
 
-## Add a new daily tool
+```sh
+python3 -m http.server 8000
+```
 
-1. Add one object at the end of `tools.json` and set `day`, `date`, `name`, `slug`, `category`, `kind`, `desc`, `tags`.
-2. Run `python3 build.py`.
-3. Commit `tools.json`, `index.html`, `feed.xml`, and `sitemap.xml`; GitHub Pages refreshes after your push. No site redesign or hand-editing card HTML needed.
+Then open `http://localhost:8000/`. Press Ctrl+C in Terminal to stop. Analytics runs only after opt-in on hosted HTTP pages; test consent on a local server or decline it while previewing. Directly opening `index.html` as a file also works; analytics is disabled for `file://`.
 
-**Notes:**
+## Publishing to GitHub Pages
 
-- The repository name and GitHub Pages URL are derived from `slug`: `https://buildiful.github.io/<slug>/` and `https://github.com/Buildiful/<slug>`.
-- `category` currently allows `Create`, `Publish`, or `Enjoy`. Update the category buttons in `template.html` and the validation in `build.py` if you add categories.
-- `kind` currently allows `book`, `card`, `gif`, `font`, or `music` for the decorative card image. Choose a close existing kind or add a new original SVG to the `ART` dictionary in `build.py`.
-- The featured tool is the one with the highest `day`; counts update automatically.
-- RSS and sitemap also update automatically.
-- GA4 link-click events automatically accept only the validated tool slugs rendered in the static catalog. No manually maintained slug list is needed, and arbitrary search terms are excluded.
-- Public tool repositories remain independent and should **not** contain Buildiful 365 day numbering or campaign promotional copy.
+The live homepage repository is [`Buildiful/buildiful.github.io`](https://github.com/Buildiful/buildiful.github.io). As checked for this update, its default branch is **`master`**. Extract this package at the repository root, commit the updated files, and push to the branch already configured for GitHub Pages in **Settings → Pages**. Do not add an extra enclosing directory.
 
-Example new entry:
+To avoid overwriting newer work, compare the ZIP with the repository before replacing it. The pack represents the inspected homepage plus the Volume Normalizer catalog/artwork update. **This local package has not been pushed to GitHub.**
+
+## Add the next release
+
+1. Append one JSON object to `tools.json`. Keep the `day`, `date`, `name`, `slug`, `category`, `kind`, `desc`, and `tags` fields.
+2. Optionally save a unique PNG (or WebP/JPEG) into `assets/tools/` and set `"image": "assets/tools/your-tool.png"`. No edits to the generator's illustration dictionary are needed when you provide a custom image. Choose any currently supported `kind` as the fallback illustration.
+3. Run `python3 build.py`.
+4. Check the homepage locally, then commit `tools.json`, the added image, `index.html`, `feed.xml`, and `sitemap.xml`. No hand-editing cards or site redesign needed.
+
+Here is the Volume Normalizer catalog record:
 
 ```json
 {
   "day": 6,
   "date": "2026-11-18",
-  "name": "Example Tool",
-  "slug": "example-tool",
-  "category": "Create",
-  "kind": "card",
-  "desc": "A short, accurate description of what the tool does.",
-  "tags": ["example", "creative"]
+  "name": "Volume Normalizer",
+  "slug": "volume-normalizer",
+  "category": "Enjoy",
+  "kind": "music",
+  "image": "assets/tools/volume-normalizer.png",
+  "desc": "Normalize audio files for consistent playback volume",
+  "tags": ["audio", "music", "loudness", "LUFS", "normalization", "sound"]
 }
 ```
 
-## Optional analytics
+**Catalog conventions:** `slug` determines the live URL `https://buildiful.github.io/<slug>/` and source repository `https://github.com/Buildiful/<slug>`. `day` determines newest-first order, the featured release and the padded day label. `category` is currently `Create`, `Publish`, or `Enjoy`; extend the buttons in `template.html` and validation in `build.py` to add categories. `kind` is used only for the legacy fallback SVG and default background color. Tool images are optional for backwards compatibility.
 
-GA4 measurement ID is `G-TG14RBXLTF`, matching the existing Buildiful tools. Google Analytics only loads after acceptance; declines persist, and the choice can be changed from the footer. Two optional link click events are allowed: `tool_open` and `source_open`. Search terms are never sent. For this static site, disable analytics in a downloaded local copy. The consent key is shared with other Buildiful tools hosted at the same origin, per existing implementation.
+Custom images must be stored locally under `assets/tools/` and named using lowercase letters, digits and hyphens, with a `.png`, `.jpg`, `.jpeg` or `.webp` extension. The build fails when the referenced image is missing. Give individual tools distinctive images and keep files reasonably small.
 
-## Public-facing brand/license
+## Analytics and privacy
 
-Code is licensed under MIT. The Buildiful® name, wordmark, logo, favicon, and brand assets are reserved, and are not licensed for unrelated use. See `LICENSE` and `TRADEMARKS.md`.
+The existing GA4 measurement ID is `G-TG14RBXLTF`. The consent module does not load the Google Analytics tag before opt-in. Only `tool_open` and `source_open` link events are allowed with catalog-validated slugs; search terms and private content are never included. Analytics is off for `file://` previews. See `privacy.html`.
+
+## License and brand
+
+Code is MIT licensed. Buildiful® name, logo, icons, and other official brand assets are reserved; see `LICENSE` and `TRADEMARKS.md`.
+
+Each standalone tool remains an independent repository. The homepage may refer to Buildiful 365 and campaign day numbers; those references do not belong inside the standalone tools' repositories.

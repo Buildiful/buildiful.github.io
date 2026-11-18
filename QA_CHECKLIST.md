@@ -1,18 +1,15 @@
-# Homepage release QA
+# Homepage contributor QA
 
-- [ ] The Buildiful organization's repository is named `buildiful.github.io` and its GitHub Pages source points to `main` / root.
-- [ ] All project files are in repository root, including `.gitignore` and `.nojekyll`.
-- [ ] The official Buildiful® white logo and favicon appear correctly (prefer local copied assets).
-- [ ] The hero shows the latest real released tool and a working direct link.
-- [ ] Every card opens a deployed tool and its correct public source repository.
-- [ ] Search, category tabs, sorting, and reset work using mouse and keyboard.
-- [ ] Phone-width, tablet, and desktop layouts work; no clipped controls or horizontal page scrolling.
-- [ ] The page works for reading and following links without JavaScript.
-- [ ] With unanswered or rejected consent, no Google Analytics script or GA4 events are sent.
-- [ ] Allow consent loads GA4; link events contain only allowlisted tool slugs, no catalog searches.
-- [ ] Declining and revisiting preserves the choice; footer analytics settings reopens consent.
-- [ ] Privacy notice is accurate and linked from the footer/consent.
-- [ ] `python3 build.py` succeeds; RSS and sitemap are valid XML.
-- [ ] New tool release test: add a test object to `tools.json` locally, rebuild, verify count/latest/cards/feed, then revert the test.
-- [ ] Review all source, README, and comments for public release; no secrets or placeholder marketing promises.
-- [ ] Each standalone tool's separate repository remains free of Buildiful 365 campaign/day references.
+- [ ] The latest release appears in the hero, with a working link to the published tool.
+- [ ] The catalog count, latest day and all six cards are correct.
+- [ ] Every card links to the right public app and source repository.
+- [ ] The Volume Normalizer icon loads on both its card and the latest-release panel.
+- [ ] Search, category filters, A-to-Z/newest/oldest sorting, and reset work with keyboard and mouse.
+- [ ] Desktop, tablet and phone widths display without sideways scrolling or clipped controls.
+- [ ] With JavaScript disabled, all release cards and links are still visible.
+- [ ] With no/declined analytics consent, the Google Analytics script is not requested.
+- [ ] Analytics settings can reopen consent; approved link events only contain catalog slugs.
+- [ ] `python3 build.py` regenerates the page, RSS feed and sitemap without error.
+- [ ] All artwork paths are present and local; missing images fail loudly during the build.
+- [ ] RSS and sitemap are valid XML and include all published releases.
+- [ ] No secrets, private release notes, unlicensed content or broken links have been added.

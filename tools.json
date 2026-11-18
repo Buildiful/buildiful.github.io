@@ -6,14 +6,9 @@
     "slug": "book-builder",
     "category": "Publish",
     "kind": "book",
+    "image": "assets/tools/001_book-builder.png",
     "desc": "Turn your manuscript into publish-ready paperback files, complete with interior pages and a cover.",
-    "tags": [
-      "books",
-      "writing",
-      "publishing",
-      "paperback",
-      "PDF"
-    ]
+    "tags": ["books", "writing", "publishing", "paperback", "PDF"]
   },
   {
     "day": 2,
@@ -22,14 +17,9 @@
     "slug": "card-builder",
     "category": "Create",
     "kind": "card",
+    "image": "assets/tools/002_card-builder.png",
     "desc": "Design and export custom cards, announcements, and graphics for any occasion.",
-    "tags": [
-      "cards",
-      "design",
-      "social",
-      "PNG",
-      "SVG"
-    ]
+    "tags": ["cards", "design", "social", "PNG", "SVG"]
   },
   {
     "day": 3,
@@ -38,13 +28,9 @@
     "slug": "gif-builder",
     "category": "Create",
     "kind": "gif",
+    "image": "assets/tools/003_gif-builder.png",
     "desc": "Make animated GIFs from your images or build them frame by frame.",
-    "tags": [
-      "animation",
-      "images",
-      "GIF",
-      "frames"
-    ]
+    "tags": ["animation", "images", "GIF", "frames"]
   },
   {
     "day": 4,
@@ -53,13 +39,9 @@
     "slug": "font-builder",
     "category": "Create",
     "kind": "font",
+    "image": "assets/tools/004_font-builder.png",
     "desc": "Draw or upload your own characters and turn them into an installable font.",
-    "tags": [
-      "typography",
-      "type",
-      "TrueType",
-      "TTF"
-    ]
+    "tags": ["typography", "type", "TrueType", "TTF"]
   },
   {
     "day": 5,
@@ -68,13 +50,19 @@
     "slug": "music-player",
     "category": "Enjoy",
     "kind": "music",
+    "image": "assets/tools/005_music-player.png",
     "desc": "Play and organize your own music library in the browser, including offline after setup.",
-    "tags": [
-      "audio",
-      "songs",
-      "music",
-      "playlists",
-      "offline"
-    ]
+    "tags": ["audio", "songs", "music", "playlists", "offline"]
+  },
+  {
+    "day": 6,
+    "date": "2026-11-18",
+    "name": "Volume Normalizer",
+    "slug": "volume-normalizer",
+    "category": "Enjoy",
+    "kind": "music",
+    "image": "assets/tools/006_volume-normalizer.png",
+    "desc": "Normalize audio files for consistent playback volume",
+    "tags": ["audio", "music", "loudness", "LUFS", "normalization", "sound"]
   }
 ]

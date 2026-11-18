@@ -1,10 +1,9 @@
-#!/usr/bin/env bash
-# Optional one-time local copy of official Buildiful assets from an existing public repository.
-set -euo pipefail
+#!/usr/bin/env sh
+# Optional convenience tool for refreshes of official branding from Buildiful's public repository.
+set -eu
 mkdir -p assets
-ROOT="https://raw.githubusercontent.com/Buildiful/music-player/main/assets"
-for f in buildiful-logo-white.png favicon.ico favicon-16x16.png favicon-32x32.png apple-touch-icon.png; do
-  echo "Fetching $f"
-  curl --fail --location --silent --show-error "$ROOT/$f" --output "assets/$f"
+BASE="https://raw.githubusercontent.com/Buildiful/music-player/main/assets"
+for filename in buildiful-logo-white.png favicon-16x16.png favicon-32x32.png apple-touch-icon.png favicon.ico; do
+  curl -fL --retry 2 "$BASE/$filename" -o "assets/$filename"
 done
-echo "Brand assets copied into ./assets."
+printf 'Updated official Buildiful assets.\n'
