@@ -64,5 +64,16 @@
     "image": "assets/tools/006_volume-normalizer.png",
     "desc": "Normalize audio files for consistent playback volume",
     "tags": ["audio", "music", "loudness", "LUFS", "normalization", "sound"]
+  },
+  {
+    "day": 7,
+    "date": "2026-11-19",
+    "name": "Boxophone",
+    "slug": "boxophone",
+    "category": "Enjoy",
+    "kind": "music",
+    "image": "assets/tools/007_boxophone.png",
+    "desc": "Play various musical instruments in your browser.",
+    "tags": ["music", "piano", "violin", "saxophone", "keyboard", "MIDI", "instruments", "Web Audio"]
   }
 ]
