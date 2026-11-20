@@ -8,7 +8,13 @@
     "kind": "book",
     "image": "assets/tools/001_book-builder.png",
     "desc": "Turn your manuscript into publish-ready paperback files, complete with interior pages and a cover.",
-    "tags": ["books", "writing", "publishing", "paperback", "PDF"]
+    "tags": [
+      "books",
+      "writing",
+      "publishing",
+      "paperback",
+      "PDF"
+    ]
   },
   {
     "day": 2,
@@ -19,7 +25,13 @@
     "kind": "card",
     "image": "assets/tools/002_card-builder.png",
     "desc": "Design and export custom cards, announcements, and graphics for any occasion.",
-    "tags": ["cards", "design", "social", "PNG", "SVG"]
+    "tags": [
+      "cards",
+      "design",
+      "social",
+      "PNG",
+      "SVG"
+    ]
   },
   {
     "day": 3,
@@ -30,7 +42,12 @@
     "kind": "gif",
     "image": "assets/tools/003_gif-builder.png",
     "desc": "Make animated GIFs from your images or build them frame by frame.",
-    "tags": ["animation", "images", "GIF", "frames"]
+    "tags": [
+      "animation",
+      "images",
+      "GIF",
+      "frames"
+    ]
   },
   {
     "day": 4,
@@ -41,7 +58,12 @@
     "kind": "font",
     "image": "assets/tools/004_font-builder.png",
     "desc": "Draw or upload your own characters and turn them into an installable font.",
-    "tags": ["typography", "type", "TrueType", "TTF"]
+    "tags": [
+      "typography",
+      "type",
+      "TrueType",
+      "TTF"
+    ]
   },
   {
     "day": 5,
@@ -52,7 +74,13 @@
     "kind": "music",
     "image": "assets/tools/005_music-player.png",
     "desc": "Play and organize your own music library in the browser, including offline after setup.",
-    "tags": ["audio", "songs", "music", "playlists", "offline"]
+    "tags": [
+      "audio",
+      "songs",
+      "music",
+      "playlists",
+      "offline"
+    ]
   },
   {
     "day": 6,
@@ -60,10 +88,17 @@
     "name": "Volume Normalizer",
     "slug": "volume-normalizer",
     "category": "Enjoy",
-    "kind": "music",
+    "kind": "book",
     "image": "assets/tools/006_volume-normalizer.png",
-    "desc": "Normalize audio files for consistent playback volume",
-    "tags": ["audio", "music", "loudness", "LUFS", "normalization", "sound"]
+    "desc": "Normalize audio files for consistent playback volume.",
+    "tags": [
+      "audio",
+      "music",
+      "loudness",
+      "LUFS",
+      "normalization",
+      "sound"
+    ]
   },
   {
     "day": 7,
@@ -71,9 +106,29 @@
     "name": "Boxophone",
     "slug": "boxophone",
     "category": "Enjoy",
-    "kind": "music",
+    "kind": "card",
     "image": "assets/tools/007_boxophone.png",
     "desc": "Play various musical instruments in your browser.",
-    "tags": ["music", "piano", "violin", "saxophone", "keyboard", "MIDI", "instruments", "Web Audio"]
+    "tags": [
+      "music",
+      "piano",
+      "violin",
+      "saxophone",
+      "keyboard",
+      "MIDI",
+      "instruments",
+      "Web Audio"
+    ]
+  },
+  {
+    "day": 8,
+    "date": "2026-11-20",
+    "name": "8-Bit Converter",
+    "slug": "8-bit-converter",
+    "category": "Create",
+    "kind": "gif",
+    "image": "assets/tools/008_8-bit-converter.png",
+    "desc": "Turn your images into retro 8-bit pixel art.",
+    "tags": ["images", "pixel art", "8-bit", "retro", "pixelation", "PNG", "JPG"]
   }
 ]
