@@ -129,6 +129,33 @@
     "kind": "gif",
     "image": "assets/tools/008_8-bit-converter.png",
     "desc": "Turn your images into retro 8-bit pixel art.",
-    "tags": ["images", "pixel art", "8-bit", "retro", "pixelation", "PNG", "JPG"]
+    "tags": [
+      "images",
+      "pixel art",
+      "8-bit",
+      "retro",
+      "pixelation",
+      "PNG",
+      "JPG"
+    ]
+  },
+  {
+    "day": 9,
+    "date": "2026-11-21",
+    "name": "Stepcells",
+    "slug": "stepcells",
+    "category": "Create",
+    "kind": "font",
+    "image": "assets/tools/009_stepcells.png",
+    "desc": "Solve word puzzles one cell at a time.",
+    "tags": [
+      "word game",
+      "puzzle",
+      "logic",
+      "brain teaser",
+      "brain builder",
+      "letters",
+      "wordplay"
+    ]
   }
 ]
