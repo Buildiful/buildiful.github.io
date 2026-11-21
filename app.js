@@ -1,7 +1,8 @@
-/* Catalog enhancement. All tool cards are present in the HTML even without JavaScript. */
+/* Progressive enhancement: tool cards remain available without JavaScript. */
 (() => {
   'use strict';
   const grid = document.getElementById('tool-grid');
+  if (!grid) return;
   const cards = [...grid.querySelectorAll('.tool-card')];
   const search = document.getElementById('search');
   const tabs = [...document.querySelectorAll('button.tab[data-category]')];
@@ -29,20 +30,19 @@
   }
   search.addEventListener('input',update);
   sort.addEventListener('change',update);
-  tabs.forEach(tab=>tab.addEventListener('click',()=>{
-    category=tab.dataset.category;
-    tabs.forEach(t=>{const active=t===tab;t.classList.toggle('active',active);t.setAttribute('aria-pressed',String(active));});
+  tabs.forEach(tab => tab.addEventListener('click', () => {
+    category = tab.dataset.category;
+    tabs.forEach(t => { const active = t === tab; t.classList.toggle('active',active); t.setAttribute('aria-pressed',String(active)); });
     update();
   }));
-  document.getElementById('reset-filters').addEventListener('click',()=>{
-    search.value='';sort.value='newest';tabs.find(t=>t.dataset.category==='all').click();search.focus();
+  document.getElementById('reset-filters').addEventListener('click', () => {
+    search.value = ''; sort.value = 'newest'; tabs.find(t => t.dataset.category === 'all').click(); search.focus();
   });
-  document.getElementById('analytics-settings').addEventListener('click',()=>window.buildifulAnalytics?.openSettings());
-  document.addEventListener('click',event=>{
-    const a=event.target.closest('a[data-track-tool],a[data-track-source]');
-    if(!a)return;
-    const slug=a.dataset.trackTool || a.dataset.trackSource;
-    window.buildifulAnalytics?.track(a.dataset.trackTool?'tool_open':'source_open',{slug});
+  document.addEventListener('click', event => {
+    const a = event.target.closest('a[data-track-tool],a[data-track-source]');
+    if (!a) return;
+    const slug = a.dataset.trackTool || a.dataset.trackSource;
+    window.BuildifulAnalytics?.track(a.dataset.trackTool ? 'tool_open' : 'source_open', slug);
   });
   update();
 })();

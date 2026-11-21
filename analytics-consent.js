@@ -1,66 +1,275 @@
-/* Optional, opt-in GA4. Nothing is sent to Google before consent. */
+/*
+ * Buildiful Analytics v2.1.0 — privacy-aware GA4 for the Buildiful 365 homepage.
+ * No GA requests before consent in consent-required/unknown regions.
+ * Eligible regions may use basic analytics without a needless banner.
+ * No advertising features, no tracking against GPC/DNT, no auto-GA if geo fails.
+ * Catalog events are allowlisted and include only catalog-verified tool slugs.
+ */
 (() => {
   'use strict';
-  const tag = document.currentScript;
-  const measurementId = tag?.dataset.measurementId || '';
-  const toolName = tag?.dataset.toolName || 'Buildiful 365';
-  const privacyUrl = tag?.dataset.privacyUrl || './privacy.html';
-  // Shared across Buildiful projects, as in the released app consent modules.
-  const KEY = 'buildiful.analytics.consent.v1';
-  const localFile = location.protocol === 'file:';
-  let accepted = false;
-  let loaded = false;
-  const slugs = new Set([...document.querySelectorAll('.tool-card[data-slug]')].map(el=>el.dataset.slug));
-  function readChoice() {try {return JSON.parse(localStorage.getItem(KEY)||'null')?.choice||null;} catch {return null;}}
-  function saveChoice(choice) {try {localStorage.setItem(KEY,JSON.stringify({choice,timestamp:new Date().toISOString()}));} catch {}}
-  function loadGA() {
-    if (!accepted || loaded || localFile || !/^G-[A-Z0-9]+$/.test(measurementId)) return;
-    loaded = true;
+  const script = document.currentScript;
+  if (!script) return;
+  const CONFIG = Object.freeze({
+    measurementId: script.dataset.measurementId || '',
+    toolName: script.dataset.toolName || document.title,
+    allowedHosts: (script.dataset.allowedHosts || 'buildiful.github.io').split(',').map(v => v.trim()),
+    privacyUrl: script.dataset.privacyUrl || './privacy.html',
+    privacyPage: script.dataset.privacyPage === 'true',
+    geoEndpoint: 'https://ipwho.is/',
+    geoTimeoutMs: 4500,
+    geoCacheMs: 12 * 60 * 60 * 1000,
+    choiceMaxMs: 365 * 24 * 60 * 60 * 1000,
+    choiceVersion: 2,
+    events: new Set((script.dataset.events || '').split(',').map(v => v.trim()).filter(v => /^[a-z][a-z0-9_]{0,39}$/.test(v)))
+  });
+  const CHOICE_KEY = 'buildiful.analytics.v2.choice';
+  const LEGACY_CHOICE_KEY = 'buildiful.analytics.consent.v1';
+  const REGION_KEY = 'buildiful.analytics.v2_1.region';
+  const EEA = new Set(['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IS','IE','IT','LV','LI','LT','LU','MT','NL','NO','PL','PT','RO','SK','SI','ES','SE']);
+  // Only populate after a region-specific legal review.
+  const OBJECTION_REGIONS = new Set([]);
+  const root = document.getElementById('analyticsConsentRoot');
+  const manageWrap = document.getElementById('analyticsManageWrap');
+  const manageButton = document.getElementById('analyticsManage');
+  let mode = 'unknown'; // consent | objection | auto | unknown
+  let tagLoaded = false;
+  let trackingEnabled = false;
+  let inited = false;
+  let lastFocused = null;
+
+  const getJSON = key => { try { return JSON.parse(localStorage.getItem(key) || 'null'); } catch (_) { return null; } };
+  const putJSON = (key, value) => { try { localStorage.setItem(key, JSON.stringify(value)); } catch (_) { /* Browser storage may be disabled. */ } };
+  function hasPrivacySignal() {
+    return navigator.globalPrivacyControl === true || navigator.doNotTrack === '1' || window.doNotTrack === '1';
+  }
+  function choice() {
+    const saved = getJSON(CHOICE_KEY);
+    if (!saved || saved.version !== CONFIG.choiceVersion || !['granted','denied'].includes(saved.value) || !Number.isFinite(saved.at)) return null;
+    if (saved.at > Date.now() || Date.now() - saved.at > CONFIG.choiceMaxMs) return null;
+    return saved.value;
+  }
+  function migrateLegacyChoice() {
+    // Preserve explicit allow/decline decisions made on the previous homepage.
+    if (choice() !== null) return;
+    const legacy = getJSON(LEGACY_CHOICE_KEY);
+    if (!legacy || !['accepted', 'declined'].includes(legacy.choice)) return;
+    const at = Date.parse(String(legacy.timestamp || ''));
+    if (!Number.isFinite(at) || at > Date.now() || Date.now() - at > CONFIG.choiceMaxMs) return;
+    putJSON(CHOICE_KEY, {value: legacy.choice === 'accepted' ? 'granted' : 'denied', at, version: CONFIG.choiceVersion});
+  }
+  function ensureTagQueue() {
+    if (window.gtag) return;
     window.dataLayer = window.dataLayer || [];
-    window.gtag = function(){window.dataLayer.push(arguments);};
-    window.gtag('js',new Date());
-    window.gtag('set',{allow_google_signals:false,allow_ad_personalization_signals:false});
-    window.gtag('config',measurementId,{
-      send_page_view:false,allow_google_signals:false,allow_ad_personalization_signals:false,
-      page_location:location.origin+location.pathname,page_path:location.pathname,page_title:document.title
+    window.gtag = function () { window.dataLayer.push(arguments); };
+  }
+  function setConsent(analytics) {
+    ensureTagQueue();
+    window.gtag('consent', 'update', {
+      analytics_storage: analytics, ad_storage: 'denied',
+      ad_user_data: 'denied', ad_personalization: 'denied'
     });
-    window.gtag('event','page_view',{page_location:location.origin+location.pathname,page_path:location.pathname,page_title:document.title,tool_name:toolName});
-    const script=document.createElement('script');
-    script.async=true;
-    script.src='https://www.googletagmanager.com/gtag/js?id='+encodeURIComponent(measurementId);
-    document.head.append(script);
   }
-  function close(){document.getElementById('buildiful-consent-banner')?.remove();}
-  function choose(choice){
-    const hadAnalytics=accepted && loaded;
-    saveChoice(choice);accepted=choice==='accepted';close();
-    if(accepted)loadGA();
-    else if(hadAnalytics){
-      try{window.gtag?.('consent','update',{analytics_storage:'denied',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied'});}catch{}
-      location.reload();
+  function disableTracking() {
+    trackingEnabled = false;
+    if (!CONFIG.measurementId) return;
+    window['ga-disable-' + CONFIG.measurementId] = true;
+    if (tagLoaded) setConsent('denied');
+  }
+  function enableTracking() {
+    if (!CONFIG.allowedHosts.includes(location.hostname) || hasPrivacySignal() || !/^G-[A-Z0-9]+$/.test(CONFIG.measurementId)) {
+      disableTracking(); return;
     }
+    trackingEnabled = true;
+    window['ga-disable-' + CONFIG.measurementId] = false;
+    if (tagLoaded) { setConsent('granted'); return; }
+    ensureTagQueue();
+    window.gtag('consent','default', {
+      analytics_storage: 'denied', ad_storage: 'denied',
+      ad_user_data: 'denied', ad_personalization: 'denied'
+    });
+    window.gtag('set', 'ads_data_redaction', true);
+    window.gtag('set', 'url_passthrough', false);
+    setConsent('granted');
+    window.gtag('js', new Date());
+    window.gtag('config', CONFIG.measurementId, {
+      send_page_view: true,
+      page_location: location.origin + location.pathname,
+      page_referrer: '',
+      allow_google_signals: false,
+      allow_ad_personalization_signals: false,
+      anonymize_ip: true
+    });
+    tagLoaded = true;
+    const ga = document.createElement('script');
+    ga.async = true;
+    ga.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(CONFIG.measurementId);
+    ga.referrerPolicy = 'no-referrer';
+    ga.onerror = () => { tagLoaded = false; trackingEnabled = false; ga.remove(); };
+    document.head.appendChild(ga);
   }
-  function openSettings(){
-    if(localFile){window.alert('Analytics is disabled in local files.');return;}
-    close();
-    const dialog=document.createElement('aside');dialog.className='consent-banner';dialog.id='buildiful-consent-banner';
-    dialog.setAttribute('role','dialog');dialog.setAttribute('aria-label','Optional analytics');
-    const heading=document.createElement('strong');heading.textContent='Help us improve Buildiful 365?';
-    const description=document.createElement('p');description.textContent='We would like to count visits and which tools people open. No search terms or tool content are collected. Everything works without analytics.';
-    const actions=document.createElement('div');actions.className='consent-actions';
-    const privacy=document.createElement('a');privacy.href=privacyUrl;privacy.textContent='Privacy';
-    const no=document.createElement('button');no.type='button';no.textContent='No thanks';no.addEventListener('click',()=>choose('declined'));
-    const yes=document.createElement('button');yes.type='button';yes.textContent='Allow';yes.addEventListener('click',()=>choose('accepted'));
-    actions.append(privacy,no,yes);dialog.append(heading,description,actions);document.body.append(dialog);
+  function savedRegionMode() {
+    const cached = getJSON(REGION_KEY);
+    if (cached && ['consent','objection','auto'].includes(cached.mode) && Number.isFinite(cached.at) &&
+        cached.at <= Date.now() && Date.now() - cached.at < CONFIG.geoCacheMs) return cached.mode;
+    return null;
   }
-  function track(event,details={}){
-    if(!accepted||!loaded||typeof window.gtag!=='function')return;
-    if(!['tool_open','source_open'].includes(event)||!slugs.has(details.slug))return;
-    window.gtag('event',event,{tool_name:toolName,tool_slug:details.slug});
+  function classify(data) {
+    if (!data || data.success === false) throw new Error('No region');
+    const country = String(data.country_code || '').toUpperCase();
+    const province = String(data.region_code || '').toUpperCase();
+    if (!/^[A-Z]{2}$/.test(country)) throw new Error('Unknown country');
+    if (EEA.has(country) || country === 'GB' || country === 'CH') return 'consent';
+    if (country === 'CA' && (!province || province === 'QC' || /QUEBEC/i.test(String(data.region || '')))) return 'consent';
+    if (OBJECTION_REGIONS.has(country)) return 'objection';
+    return 'auto';
   }
-  window.buildifulAnalytics={openSettings,track,get accepted(){return accepted;}};
-  if(localFile)return;
-  const saved=readChoice();
-  if(saved==='accepted'){accepted=true;loadGA();}
-  else if(saved!=='declined')openSettings();
+  async function detectMode() {
+    const cached = savedRegionMode();
+    if (cached) return cached;
+    const abort = new AbortController();
+    const timer = setTimeout(() => abort.abort(), CONFIG.geoTimeoutMs);
+    try {
+      const response = await fetch(CONFIG.geoEndpoint, {
+        method: 'GET', signal: abort.signal, credentials: 'omit',
+        referrerPolicy: 'no-referrer', cache: 'no-store'
+      });
+      if (!response.ok) throw new Error('Region request failed');
+      const modeFound = classify(await response.json());
+      // Coarse category only; do not retain IP, coordinates, or the provider response.
+      putJSON(REGION_KEY, {mode: modeFound, at: Date.now()});
+      return modeFound;
+    } finally { clearTimeout(timer); }
+  }
+  function canManage() {
+    // Previous explicit consent/decline remains revisable after a region change.
+    return mode !== 'auto' || choice() !== null;
+  }
+  function updateManageButton() {
+    if (!manageWrap || !manageButton) return;
+    const canShow = CONFIG.allowedHosts.includes(location.hostname) && !hasPrivacySignal() && canManage();
+    manageWrap.hidden = !canShow;
+    manageButton.disabled = !canShow;
+  }
+  function injectStyles() {
+    if (document.getElementById('buildiful-analytics-style')) return;
+    const style = document.createElement('style');
+    style.id = 'buildiful-analytics-style';
+    style.textContent = `
+      .bf-consent-backdrop{position:fixed;inset:0;z-index:10000;background:rgba(13,27,44,.52);display:grid;place-items:center;padding:16px}
+      .bf-consent{box-sizing:border-box;background:#fff;color:#152d42;border-radius:18px;box-shadow:0 12px 60px #0004;width:min(100%,540px);padding:clamp(22px,4vw,34px);font:18px/1.5 system-ui,sans-serif}
+      .bf-consent h2{font-size:clamp(25px,3vw,32px);line-height:1.2;margin:0 0 12px;letter-spacing:.01em}
+      .bf-consent p{font-size:18px;margin:0 0 16px}
+      .bf-consent a{color:#155ba9;text-decoration:underline}
+      .bf-consent-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
+      .bf-consent-actions button{min-height:50px;font:700 18px system-ui,sans-serif;border-radius:10px;padding:10px 20px;border:2px solid #173954;cursor:pointer}
+      .bf-consent-actions .bf-primary{background:#173954;color:#fff}
+      .bf-consent-actions .bf-secondary{background:#fff;color:#173954}
+      .bf-consent-actions button:focus-visible,.bf-consent a:focus-visible{outline:3px solid #dd9a00;outline-offset:3px}
+    `;
+    document.head.appendChild(style);
+  }
+  function closeBanner() {
+    if (root) root.replaceChildren();
+    updateManageButton();
+    if (lastFocused?.isConnected) lastFocused.focus();
+    lastFocused = null;
+  }
+  function remember(value) {
+    if (value === 'granted' && hasPrivacySignal()) value = 'denied';
+    putJSON(CHOICE_KEY, {value, at: Date.now(), version: CONFIG.choiceVersion});
+    if (value === 'granted') enableTracking(); else disableTracking();
+    closeBanner();
+  }
+  function showBanner(settings = false) {
+    if (!root || (mode === 'auto' && !canManage()) || !CONFIG.allowedHosts.includes(location.hostname)) return;
+    injectStyles();
+    lastFocused = document.activeElement;
+    root.replaceChildren();
+    const backdrop = document.createElement('div');
+    backdrop.className = 'bf-consent-backdrop';
+    const panel = document.createElement('section');
+    panel.className = 'bf-consent';
+    panel.setAttribute('role', 'dialog');
+    panel.setAttribute('aria-modal', 'true');
+    panel.setAttribute('aria-label', 'Analytics preferences');
+    const heading = document.createElement('h2');
+    heading.textContent = 'Optional analytics';
+    const copy = document.createElement('p');
+    copy.textContent = 'Allow Google Analytics to count visits and basic tool actions?';
+    const link = document.createElement('a');
+    link.href = CONFIG.privacyUrl;
+    link.textContent = 'Privacy details';
+    const controls = document.createElement('div');
+    controls.className = 'bf-consent-actions';
+    const decline = document.createElement('button');
+    decline.type = 'button'; decline.className = 'bf-secondary';
+    decline.textContent = mode === 'objection' ? 'Turn off analytics' : 'No thanks';
+    decline.addEventListener('click', () => remember('denied'));
+    const allow = document.createElement('button');
+    allow.type = 'button'; allow.className = 'bf-primary';
+    allow.textContent = 'Allow analytics';
+    allow.addEventListener('click', () => remember('granted'));
+    if (mode === 'objection') copy.textContent = 'Analytics is enabled for basic statistics. You can turn it off here.';
+    controls.append(decline, allow);
+    if (settings) {
+      const close = document.createElement('button');
+      close.type = 'button'; close.textContent = 'Close'; close.className = 'bf-secondary';
+      close.addEventListener('click', closeBanner);
+      controls.append(close);
+    }
+    panel.append(heading, copy, link, controls);
+    backdrop.append(panel);
+    root.append(backdrop);
+    allow.focus();
+    const onKey = event => {
+      if (event.key === 'Escape' && settings) { closeBanner(); return; }
+      if (event.key !== 'Tab') return;
+      const items = Array.from(panel.querySelectorAll('a[href],button:not([disabled])'));
+      if (!items.length) return;
+      const first = items[0], last = items[items.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+    };
+    backdrop.addEventListener('keydown', onKey);
+  }
+  async function init() {
+    if (inited) return;
+    inited = true;
+    if (manageButton) manageButton.addEventListener('click', () => showBanner(true));
+    if (!CONFIG.allowedHosts.includes(location.hostname) || !/^G-[A-Z0-9]+$/.test(CONFIG.measurementId)) {
+      updateManageButton(); return;
+    }
+    if (hasPrivacySignal()) { disableTracking(); updateManageButton(); return; }
+    migrateLegacyChoice();
+    const previous = choice();
+    if (previous === 'denied') disableTracking();
+    if (previous === 'granted') enableTracking();
+    try { mode = await detectMode(); }
+    catch (_) { mode = 'unknown'; }
+    const current = choice();
+    if (hasPrivacySignal()) disableTracking();
+    else if (current === 'denied') disableTracking();
+    else if (current === 'granted') enableTracking();
+    else if (mode === 'auto' || mode === 'objection') enableTracking();
+    else if (!CONFIG.privacyPage) showBanner();
+    updateManageButton();
+  }
+  window.BuildifulAnalytics = Object.freeze({
+    version: '2.1.0',
+    track(name, slug) {
+      if (!trackingEnabled || !tagLoaded || hasPrivacySignal() || !CONFIG.events.has(name)) return;
+      if (name === 'tool_open' || name === 'source_open') {
+        // Only exact slugs rendered from the site's validated tool catalog.
+        const known = typeof slug === 'string' && [...document.querySelectorAll('.tool-card[data-slug]')]
+          .some(card => card.dataset.slug === slug);
+        if (!known) return;
+        window.gtag?.('event', name, {tool_name: CONFIG.toolName, tool_slug: slug});
+      } else {
+        window.gtag?.('event', name, {tool_name: CONFIG.toolName});
+      }
+    },
+    openSettings() { if (!hasPrivacySignal() && canManage()) showBanner(true); }
+  });
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => { void init(); }, {once:true});
+  else void init();
 })();

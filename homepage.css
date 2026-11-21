@@ -1,0 +1,108 @@
+/* Responsive layout and typography for the Buildiful 365 homepage. */
+:root { font-size: 17px; }
+.site-header { height: auto; min-height: 92px; }
+.header-inner { min-height: 92px; }
+.brand { height: auto; gap: 0; }
+.brand-word { font-size: 28px; letter-spacing: .015em; }
+.brand-image { width: 156px; height: 42px; }
+.brand-image.is-ready { display: block; }
+.shell-divider { width: 1px; height: 35px; background: #668398; flex: none; }
+.shell-identity { display: flex; align-items: center; gap: 18px; min-width: 0; }
+.tool-name { font-size: clamp(22px, 2vw, 28px); letter-spacing: .015em; line-height: 1.2; font-weight: 850; color: #fff; white-space: nowrap; }
+.tool-name:hover, .tool-name:focus-visible { color: #c2e8fa; }
+.main-nav { font-size: 16px; gap: 26px; }
+.nav-github { padding: 11px 16px; }
+.hero-inner { gap: 42px; padding-top: 94px; padding-bottom: 93px; }
+.eyebrow { font-size: 13px; letter-spacing: .16em; flex-wrap: wrap; row-gap: 8px; }
+.hero h1 { font-size: clamp(51px, 5.3vw, 75px); letter-spacing: .012em; line-height: 1.12; font-weight: 850; margin: 29px 0 25px; overflow-wrap: normal; }
+.hero-description { font-size: clamp(18px, 1.5vw, 20px); line-height: 1.65; max-width: 590px; }
+.button { font-size: 16px; min-height: 55px; letter-spacing: .01em; }
+.hero-notes { font-size: 15px; gap: 21px; }
+.note-check { width: 20px; height: 20px; }
+.latest-panel { padding: 27px; }
+.latest-pill, .latest-day { font-size: 13px; }
+.latest-meta { font-size: 13px; letter-spacing: .12em; }
+.latest-copy h2 { font-size: clamp(28px, 3vw, 36px); letter-spacing: .02em; line-height: 1.2; }
+.latest-copy p { font-size: 17px; line-height: 1.55; max-width: none; }
+.latest-link { font-size: 16px; min-height: 50px; }
+.strip-inner { font-size: 15px; letter-spacing: .035em; min-height: 70px; }
+.strip-inner strong { font-size: 22px; }
+.tools-section { padding-top: 77px; padding-bottom: 98px; }
+.section-intro { align-items: center; margin-bottom: 25px; }
+.section-kicker { font-size: 15px; letter-spacing: .12em; }
+.rss-link { font-size: 16px; }
+.tab { font-size: 16px; padding: 13px 19px; min-height: 47px; }
+.search-wrap { width: min(340px, 100%); }
+.search-wrap input { font-size: 16px; height: 48px; padding-left: 43px; }
+.search-wrap svg { top: 14px; left: 14px; }
+.result-bar { font-size: 15px; margin: 21px 0 23px; }
+.sort-wrap select { font-size: 16px; }
+.tools-grid { gap: 23px; }
+.tool-body { padding: 23px 23px 22px; }
+.tool-card h3 { font-size: clamp(23px, 2.25vw, 28px); letter-spacing: .012em; line-height: 1.25; }
+.tool-card p { font-size: 16px; line-height: 1.6; min-height: 80px; }
+.tool-day { font-size: 13px; }
+.tool-category { font-size: 13px; }
+.tool-open, .tool-code { font-size: 15px; }
+.empty-state h3 { font-size: 26px; letter-spacing: .015em; }
+.empty-state p { font-size: 17px; }
+.empty-state button { font-size: 16px; min-height: 46px; }
+.about { padding: 85px 0; }
+.about-inner { grid-template-columns: minmax(0,1.02fr) minmax(0,.98fr); gap: 56px; }
+.about h2 { font-size: clamp(38px, 4vw, 55px); letter-spacing: .016em; line-height: 1.2; overflow-wrap: normal; }
+.about-right p { font-size: 18px; line-height: 1.75; }
+.about-right a { font-size: 16px; }
+.site-footer { padding-top: 46px; }
+.footer-brand { font-size: 25px; letter-spacing: .015em; }
+.footer-brand .footer-number { font-size: 22px; }
+.footer-main p, .footer-nav a, .footer-nav button { font-size: 15px; }
+.footer-bottom { font-size: 13px; line-height: 1.5; }
+.footer-bottom .footer-tagline { font-size: 18px; font-weight: 700; letter-spacing: .012em; line-height: 1.45; }
+.footer-version { color: #9cb7cb; font-weight: 750; }
+@media (max-width: 1000px) {
+  .hero-inner { grid-template-columns: 1fr 380px; gap: 27px; }
+  .hero h1 { font-size: clamp(47px, 5.5vw, 61px); }
+}
+@media (max-width: 800px) {
+  .header-inner { flex-wrap: wrap; gap: 12px; padding-top: 14px; padding-bottom: 14px; }
+  .hero-inner { grid-template-columns: 1fr; gap: 38px; max-width: 640px; }
+  .hero h1 { font-size: clamp(50px, 8.4vw, 69px); }
+  .about-inner { grid-template-columns: 1fr; gap: 22px; }
+}
+@media (max-width: 600px) {
+  .header-inner { align-items: flex-start; flex-direction: column; gap: 10px; }
+  .shell-identity { gap: 11px; }
+  .brand-image { width: 112px; height: 33px; }
+  .brand-word { font-size: 22px; }
+  .shell-divider { height: 27px; }
+  .tool-name { font-size: clamp(20px, 5.4vw, 25px); }
+  .main-nav { display: flex; width: 100%; gap: 14px; font-size: 15px; justify-content: space-between; }
+  .main-nav .nav-selected { display: inline; }
+  .main-nav a[href="#about"] { display: inline; }
+  .nav-github { padding: 7px 11px; }
+  .hero-inner { padding-top: 60px; padding-bottom: 64px; }
+  .hero h1 { font-size: clamp(39px, 9.7vw, 56px); line-height: 1.15; letter-spacing: .008em; }
+  .hero-description { font-size: 18px; }
+  .eyebrow { font-size: 11px; }
+  .hero-notes { font-size: 13px; }
+  .hero-actions { gap: 17px; }
+  .button { font-size: 15px; }
+  .latest-panel { padding: 20px; }
+  .latest-copy h2 { font-size: 28px; }
+  .latest-copy p { font-size: 16px; }
+  .strip-inner { font-size: 13px; gap: 14px; }
+  .strip-inner strong { font-size: 19px; }
+  .section-intro { flex-wrap: wrap; align-items: start; }
+  .section-kicker { font-size: 13px; }
+  .rss-link { font-size: 14px; }
+  .tab { font-size: 15px; padding: 10px 13px; }
+  .search-wrap { width: 100%; }
+  .result-bar { font-size: 14px; }
+  .tool-card p { min-height: 0; }
+  .tool-open, .tool-code { font-size: 15px; }
+  .about h2 { font-size: clamp(35px, 8vw, 46px); }
+  .about-right p { font-size: 17px; }
+  .footer-main p, .footer-nav a, .footer-nav button { font-size: 15px; }
+  .footer-bottom { font-size: 13px; }
+  .footer-bottom .footer-tagline { display: block; font-size: 17px; line-height: 1.55; }
+}

@@ -18,19 +18,22 @@
   <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
   <link rel="alternate" type="application/rss+xml" title="Buildiful 365 releases" href="./feed.xml">
   <link rel="stylesheet" href="./styles.css">
-  <script defer src="./analytics-consent.js" data-measurement-id="G-TG14RBXLTF" data-tool-name="Buildiful 365" data-privacy-url="./privacy.html"></script>
+  <link rel="stylesheet" href="./homepage.css">
+  <script defer src="./analytics-consent.js" data-measurement-id="G-TG14RBXLTF" data-tool-name="Buildiful 365" data-privacy-url="./privacy.html" data-events="tool_open,source_open"></script>
   <script defer src="./app.js"></script>
 </head>
 <body>
   <a class="skip-link" href="#tools">Skip to tools</a>
   <header class="site-header" id="top">
     <div class="container header-inner">
-      <a class="brand" href="./" aria-label="Buildiful 365 home">
-        <span class="brand-word" aria-hidden="true">Buildiful®</span>
-        <img class="brand-image" src="./assets/buildiful-logo-white.png" alt="" width="140" height="34" onload="this.classList.add('is-ready');this.previousElementSibling.hidden=true" onerror="this.remove()">
-        <span class="brand-line" aria-hidden="true"></span>
-        <span class="brand-365">365</span>
-      </a>
+      <div class="shell-identity">
+        <a class="brand" href="https://buildiful.com/" aria-label="Buildiful® website">
+          <span class="brand-word" aria-hidden="true">Buildiful®</span>
+          <img class="brand-image" src="./assets/buildiful-logo-white.png" alt="" width="156" height="42" onload="this.classList.add('is-ready');this.previousElementSibling.hidden=true" onerror="this.remove()">
+        </a>
+        <span class="shell-divider" aria-hidden="true"></span>
+        <a class="tool-name" href="https://buildiful.github.io/">365</a>
+      </div>
       <nav class="main-nav" aria-label="Main navigation">
         <a class="nav-selected" href="#tools">Explore tools</a>
         <a href="#about">About</a>
@@ -63,15 +66,15 @@
       </div>
     </section>
 
-    <div class="marquee-strip" aria-label="Our commitment">
-      <div class="container strip-inner"><span><strong>009</strong> tools released</span><span class="strip-star">✳</span><span><strong>365</strong> tools planned</span><span class="strip-star">✳</span><span>Created to be shared. Free to explore.</span><span class="strip-star strip-star-last">✳</span><span class="strip-extra">Built with curiosity.</span></div>
+    <div class="marquee-strip" aria-label="Buildiful 365 release progress">
+      <div class="container strip-inner"><span><strong>009</strong> tools released</span><span class="strip-star" aria-hidden="true">✳</span><span><strong>365</strong> tools planned</span></div>
     </div>
 
     <section class="tools-section" id="tools" aria-labelledby="tools-heading">
       <div class="container">
-        <div class="section-intro"><div><div class="section-kicker">THE FREE TOOL COLLECTION <span class="section-spark">✳</span> 9 LIVE</div>
-          <h2 id="tools-heading">Find your next <em>spark.</em></h2>
-          <p>There is something new to try every day. Start anywhere.</p></div>
+        <h2 id="tools-heading" class="sr-only">Free tool collection</h2>
+        <div class="section-intro">
+          <div class="section-kicker">THE FREE TOOL COLLECTION <span class="section-spark">✳</span> 9 LIVE</div>
           <a href="./feed.xml" class="rss-link">Follow releases via RSS <span aria-hidden="true">↗</span></a>
         </div>
         <div class="tool-controls">
@@ -142,18 +145,30 @@
           </article>
         </div>
         <div id="empty-state" class="empty-state" hidden><span aria-hidden="true">✳</span><h3>No tools found (yet).</h3><p>Try a different search or browse the full collection.</p><button type="button" id="reset-filters">Show all tools</button></div>
-        <p class="collection-end">Just the beginning. <span>More tools are on the way.</span> <span aria-hidden="true">✳</span></p>
       </div>
     </section>
 
     <section class="about" id="about" aria-labelledby="about-heading">
       <div class="container about-inner">
-        <div class="about-left"><div class="section-kicker">WHY BUILDIFUL 365?</div><h2 id="about-heading">The more we make,<br>the more we <em>share.</em></h2></div>
+        <div class="about-left"><div class="section-kicker">WHY BUILDIFUL 365?</div><h2 id="about-heading">Making the web<br>as open as <em>astronomy.</em></h2></div>
         <div class="about-right"><p>We believe useful tools should be within everyone's reach. So we're releasing one free tool each day for 365 days — small, practical things that help you build something of your own.</p><p>No accounts, subscriptions, or advertising. The code is open for you to explore, learn from, and improve, subject to each project's license.</p><a href="https://buildiful.com/" target="_blank" rel="noopener noreferrer">Meet Buildiful® <span aria-hidden="true">↗</span></a></div>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer"><div class="container footer-main"><div><a href="#top" class="footer-brand">Buildiful<span>®</span> <span class="footer-number">365</span></a><p>One free tool a day. Open possibilities for all.</p></div><div class="footer-nav"><a href="#tools">All tools</a><a href="https://github.com/Buildiful" target="_blank" rel="noopener noreferrer">GitHub</a><a href="https://buildiful.com/" target="_blank" rel="noopener noreferrer">Buildiful.com</a><a href="./privacy.html">Privacy</a><button type="button" id="analytics-settings">Analytics settings</button></div></div><div class="container footer-bottom"><span>© 2026 Buildiful®. All rights reserved for brand assets.</span><span>Designed to be useful. Built to be shared. <span class="footer-heart">♥</span></span></div></footer>
+  <footer class="site-footer">
+    <div class="container footer-main">
+      <div><a class="footer-brand" href="https://buildiful.com/">Built by Buildiful®</a></div>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="#tools">Explore tools</a>
+        <a href="#about">About</a>
+        <a href="https://github.com/Buildiful" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="./privacy.html">Privacy</a>
+        <span class="footer-version">v1.0.1</span>
+      </nav>
+    </div>
+    <div class="container footer-bottom"><span>© 2026 Buildiful®. Brand assets reserved.</span><span class="footer-tagline">One free tool a day. Open possibilities for all. <span class="footer-heart">♥</span></span></div>
+  </footer>
+  <div id="analyticsConsentRoot"></div>
 </body>
 </html>
