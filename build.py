@@ -12,6 +12,8 @@ from xml.sax.saxutils import escape as xml_escape
 import json
 import re
 
+from category_utils import normalize_category, ordered_categories
+
 ROOT = Path(__file__).resolve().parent
 SITE = 'https://buildiful.github.io'
 TOOLS = json.loads((ROOT / 'tools.json').read_text(encoding='utf-8'))
@@ -50,13 +52,18 @@ for tool in TOOLS:
     assert isinstance(tool['day'], int) and 1 <= tool['day'] <= 365, 'Invalid day'
     assert re.fullmatch(r'[a-z0-9]+(?:-[a-z0-9]+)*', tool['slug']), 'Invalid slug'
     assert tool['kind'] in ART, 'Invalid artwork kind (extend ART for new fallback illustrations)'
-    assert tool['category'] in {'Create', 'Publish', 'Enjoy'}, 'Invalid category'
+    tool['category'] = normalize_category(tool['category'])
     datetime.strptime(tool['date'], '%Y-%m-%d')
     assert tool['day'] not in seen_days and tool['slug'] not in seen_slugs, 'Duplicate day or slug'
     image_path(tool)
     seen_days.add(tool['day'])
     seen_slugs.add(tool['slug'])
 TOOLS.sort(key=lambda item: item['day'], reverse=True)
+
+CATEGORIES = ordered_categories(tool['category'] for tool in TOOLS)
+canonical = {value.casefold(): value for value in CATEGORIES}
+for tool in TOOLS:
+    tool['category'] = canonical[tool['category'].casefold()]
 
 
 def artwork(tool, featured=False):
@@ -83,7 +90,12 @@ def make_card(t):
           </article>'''
 
 latest = TOOLS[0]
+category_tabs = '\n'.join(
+    f'            <button class="tab" data-category="{h(category)}" type="button" aria-pressed="false">{h(category)}</button>'
+    for category in CATEGORIES
+)
 subs = {
+    '{{CATEGORY_TABS}}': category_tabs,
     '{{COUNT}}': str(len(TOOLS)),
     '{{COUNT_PADDED}}': f'{len(TOOLS):03d}',
     '{{LATEST_DAY}}': f'{latest["day"]:03d}',

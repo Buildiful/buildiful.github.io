@@ -23,6 +23,14 @@ Copy `import_release.py` into the root of the existing `Buildiful/buildiful.gith
 
 The homepage is independent of the Card Builder. It is also possible to add an entry manually to `tools.json`, copy its PNG into `assets/tools/`, and run `python3 build.py` as before.
 
+## Categories and homepage tint
+
+Category names are not limited to Create, Publish, Enjoy and Game. Use any short descriptive label, such as **Explore**, **Education** or **Productivity**, in the internal Release Pack Builder. The homepage importer and static generator validate the name and automatically add a filter tab the first time a category appears. A repeat of the same label with different capitalization reuses the existing category. The built-in categories appear first in the order Create, Publish, Enjoy, Game; new categories follow alphabetically. No manual changes to `template.html` or `app.js` are needed.
+
+**Category is not homepage tint.** The release pack's `category` is a freely typed label, whereas the `kind` field is the existing tint/fallback-artwork selector and remains limited to `book`, `card`, `gif`, `font`, and `music`. For example, Day 011 can use category `Explore` and kind `book`. Keep both fields as exported by the Builder.
+
+If you replace scripts in an existing Git checkout, commit the script/template changes before using `--publish`, because that option intentionally refuses unrelated uncommitted changes. The `--dry-run` and plain import options work before committing.
+
 ## Icon Standard v1.0 (from Day 007 onward)
 
 The icon generator runs entirely locally in Card Builder:
@@ -42,7 +50,7 @@ The first six released icons remain unchanged. Homepage background tints are sep
 
 ## Format and safety
 
-`release.json` uses `"schema": "buildiful365-release-pack/v1"` and contains `release` data plus `assets.icon`. The importer validates day, slug, category, tint, tags, and a 1024×1024 PNG before writing. New entries are appended to `tools.json`, then the existing generator updates HTML, RSS, and sitemap. Existing day numbers, slugs, and images cannot be overwritten. If the generator fails, the importer attempts to restore original catalog and generated files.
+`release.json` uses `"schema": "buildiful365-release-pack/v1"` and contains `release` data plus `assets.icon`. The importer validates day, slug, a custom category label, the existing homepage tint, tags, and a 1024×1024 PNG before writing. New entries are appended to `tools.json`, then the existing generator updates HTML, RSS, and sitemap. Existing day numbers, slugs, and images cannot be overwritten. If the generator fails, the importer attempts to restore original catalog and generated files.
 
 Do not put the private Card Builder application, its working projects, internal release readiness notes, or the complete daily ZIP into the public homepage repository. You may include this document and the public-facing QA checklist.
 

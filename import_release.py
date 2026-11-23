@@ -17,10 +17,11 @@ import sys
 from pathlib import Path
 from zipfile import ZipFile, BadZipFile
 
+from category_utils import normalize_category
+
 ROOT = Path(__file__).resolve().parent
 SCHEMA = 'buildiful365-release-pack/v1'
 KINDS = {'book', 'card', 'gif', 'font', 'music'}
-CATEGORIES = {'Create', 'Publish', 'Enjoy'}
 MAX_PACKAGE = 75 * 1024 * 1024
 MAX_ICON = 12 * 1024 * 1024
 
@@ -55,8 +56,12 @@ def validate_release(obj):
         datetime.datetime.strptime(date, '%Y-%m-%d')
     except ValueError:
         raise ReleaseError('Release date is not a real calendar date.')
-    if release.get('category') not in CATEGORIES or release.get('kind') not in KINDS:
-        raise ReleaseError('Invalid category or homepage card tint.')
+    try:
+        category = normalize_category(release.get('category'))
+    except ValueError as exc:
+        raise ReleaseError(str(exc))
+    if release.get('kind') not in KINDS:
+        raise ReleaseError('Invalid homepage card tint (kind).')
     tags = release.get('tags')
     if not isinstance(tags, list) or len(tags) > 20 or any(not isinstance(t, str) or not t.strip() or len(t) > 40 for t in tags):
         raise ReleaseError('Invalid search tags.')
@@ -65,7 +70,7 @@ def validate_release(obj):
         'date': date,
         'name': release['name'].strip(),
         'slug': slug,
-        'category': release['category'],
+        'category': category,
         'kind': release['kind'],
         'image': image,
         'desc': release['desc'].strip(),
@@ -117,6 +122,13 @@ def import_release(package_path, dry_run=False):
         raise ReleaseError('Existing tools.json is invalid.')
     if not isinstance(catalog, list):
         raise ReleaseError('Existing tools.json must be a list.')
+    # Reuse a previously published spelling when a category is typed with
+    # different capitalization in the Builder (e.g. "explore" vs "Explore").
+    existing_categories = {
+        normalize_category(tool.get('category')).casefold(): normalize_category(tool.get('category'))
+        for tool in catalog
+    }
+    release['category'] = existing_categories.get(release['category'].casefold(), release['category'])
     if any(tool.get('day') == release['day'] for tool in catalog):
         raise ReleaseError('Day {:03d} is already present; no existing release will be changed.'.format(release['day']))
     if any(tool.get('slug') == release['slug'] for tool in catalog):

@@ -1,0 +1,34 @@
+Buildiful 365 Homepage — Dynamic Categories Update
+
+This update corrects Day 011 (Time Travel Tracker) category "Explore" and enables
+future category names without requiring code or filter-tab updates.
+
+To apply to your EXISTING local homepage Git checkout:
+1. Keep a backup (or make a Git commit) of your current changes.
+2. Copy the six supplied files into the root of your buildiful.github.io repository,
+   alongside tools.json. Overwrite the previous versions of the five existing files;
+   add the new category_utils.py. Do not replace tools.json, app.js, CSS or analytics files.
+3. From your repository root, verify the supplied release (no changes made):
+
+   python3 import_release.py ~/Downloads/Buildiful-365-Release-011_time-travel-tracker.zip --dry-run
+
+4. Import locally and regenerate the homepage:
+
+   python3 import_release.py ~/Downloads/Buildiful-365-Release-011_time-travel-tracker.zip
+
+5. Inspect the generated homepage and confirm the new Explore filter works.
+6. Commit and push through your normal Git workflow. Example:
+
+   git add import_release.py build.py category_utils.py template.html README.md DAILY_RELEASE_WORKFLOW.md tools.json index.html feed.xml sitemap.xml assets/tools/011_time-travel-tracker.png
+   git commit -m "Support dynamic homepage categories and add Day 011"
+   git push
+
+IMPORTANT: --publish checks for a clean working tree BEFORE importing. If you use
+--publish, first commit the script/template updates and then run the command on
+an otherwise clean checkout. The plain import command avoids that extra step.
+
+No changes to the release pack are required. Day 011's "Explore" category and
+"book" tint are both valid, and remain distinct fields.
+
+The patch does NOT contain any release-specific PNGs or social images.
+Homepage version stays v1.0.1. No files have been pushed to GitHub.

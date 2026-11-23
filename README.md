@@ -15,12 +15,17 @@ The site is built with static HTML, CSS, and JavaScript and is hosted on GitHub 
 - `index.html` — generated homepage, including the published catalog.
 - `template.html` — homepage layout source.
 - `tools.json` — public catalog data.
-- `build.py` — standard-library Python generator for the homepage, RSS feed, and sitemap.
+- `build.py` — standard-library Python generator for the homepage, RSS feed, sitemap, and category tabs.
+- `category_utils.py` — shared validation and ordering for dynamically typed categories.
 - `styles.css` and `homepage.css` — base styling and homepage typography.
 - `app.js` — browser-side search, filters, sorting, and link event handling.
 - `assets/` — Buildiful® branding and tool artwork.
 - `privacy.html` and `analytics-consent.js` — privacy information and privacy-aware website analytics.
 - `feed.xml` and `sitemap.xml` — release feed and sitemap.
+
+## Homepage categories
+
+Category names are stored in `tools.json` and may be typed freely in release packs (for example, `Game`, `Explore`, or `Education`). The importer and generator share the category validation rules in `category_utils.py`. Whenever `python3 build.py` runs, the site automatically builds the filter tabs from the catalog's category values. The separate `kind` field continues to control existing homepage card tints.
 
 ## Run locally
 

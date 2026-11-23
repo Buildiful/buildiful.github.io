@@ -144,7 +144,7 @@
     "date": "2026-11-21",
     "name": "Stepcells",
     "slug": "stepcells",
-    "category": "Create",
+    "category": "Game",
     "kind": "font",
     "image": "assets/tools/009_stepcells.png",
     "desc": "Solve word puzzles one cell at a time.",
@@ -156,6 +156,53 @@
       "brain builder",
       "letters",
       "wordplay"
+    ]
+  },
+  {
+    "day": 10,
+    "date": "2026-11-22",
+    "name": "Pair Where?",
+    "slug": "pair-where",
+    "category": "Game",
+    "kind": "music",
+    "image": "assets/tools/010_pair-where.png",
+    "desc": "Challenge your memory by finding the pairs, then sort the revealed cards into numerical order.",
+    "tags": [
+      "memory game",
+      "matching",
+      "pairs",
+      "card game",
+      "puzzle",
+      "sorting",
+      "numbers",
+      "logic",
+      "brain teaser",
+      "brain builder",
+      "Beebbots"
+    ]
+  },
+  {
+    "day": 11,
+    "date": "2026-11-23",
+    "name": "Time Travel Tracker",
+    "slug": "time-travel-tracker",
+    "category": "Explore",
+    "kind": "book",
+    "image": "assets/tools/011_time-travel-tracker.png",
+    "desc": "Log flights and see how far you've traveled forward or backward in time.",
+    "tags": [
+      "time travel",
+      "flight tracker",
+      "flights",
+      "travel",
+      "aviation",
+      "airports",
+      "time zones",
+      "time difference",
+      "travel log",
+      "trip history",
+      "clock time",
+      "lifetime tracker"
     ]
   }
 ]
