@@ -225,5 +225,26 @@
       "organization",
       "productivity"
     ]
+  },
+  {
+    "day": 13,
+    "date": "2026-11-25",
+    "name": "Computer Upcycler",
+    "slug": "computer-upcycler",
+    "category": "Utility",
+    "kind": "gif",
+    "image": "assets/tools/013_computer-upcycler.png",
+    "desc": "Give your old computer a new life with a step-by-step Ubuntu installation guide.",
+    "tags": [
+      "computer upcycling",
+      "Ubuntu",
+      "Linux",
+      "operating system",
+      "bootable USB",
+      "installation guide",
+      "computer reuse",
+      "sustainability",
+      "open source"
+    ]
   }
 ]
