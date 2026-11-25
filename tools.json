@@ -204,5 +204,26 @@
       "clock time",
       "lifetime tracker"
     ]
+  },
+  {
+    "day": 12,
+    "date": "2026-11-24",
+    "name": "Package Manager",
+    "slug": "package-manager",
+    "category": "Organize",
+    "kind": "card",
+    "image": "assets/tools/012_package-manager.png",
+    "desc": "Keep track of your package deliveries.",
+    "tags": [
+      "package manager",
+      "package tracker",
+      "delivery tracker",
+      "parcels",
+      "shipments",
+      "returns",
+      "logistics",
+      "organization",
+      "productivity"
+    ]
   }
 ]
