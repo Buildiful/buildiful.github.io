@@ -246,5 +246,27 @@
       "sustainability",
       "open source"
     ]
+  },
+  {
+    "day": 14,
+    "date": "2026-11-26",
+    "name": "Camera",
+    "slug": "camera",
+    "category": "Create",
+    "kind": "font",
+    "image": "assets/tools/014_camera.png",
+    "desc": "Turn your device into a customizable digital camera.",
+    "tags": [
+      "camera",
+      "photography",
+      "digital camera",
+      "webcam",
+      "USB camera",
+      "Raspberry Pi",
+      "computational photography",
+      "DIY",
+      "BAY",
+      "Build Anything Yourself"
+    ]
   }
 ]
