@@ -268,5 +268,27 @@
       "BAY",
       "Build Anything Yourself"
     ]
+  },
+  {
+    "day": 15,
+    "date": "2026-11-27",
+    "name": "Recipe Builder",
+    "slug": "recipe-builder",
+    "category": "Create",
+    "kind": "music",
+    "image": "assets/tools/015_recipe-builder.png",
+    "desc": "Discover recipes based on the ingredients you already have.",
+    "tags": [
+      "recipe",
+      "cooking",
+      "food",
+      "leftovers",
+      "ingredients",
+      "meal planning",
+      "food waste",
+      "sustainability",
+      "kitchen",
+      "BAY"
+    ]
   }
 ]
