@@ -290,5 +290,26 @@
       "kitchen",
       "BAY"
     ]
+  },
+  {
+    "day": 16,
+    "date": "2026-11-28",
+    "name": "Buildzle",
+    "slug": "buildzle",
+    "category": "Game",
+    "kind": "book",
+    "image": "assets/tools/016_buildzle.png",
+    "desc": "An original puzzle game.",
+    "tags": [
+      "puzzle game",
+      "logic",
+      "spatial reasoning",
+      "building",
+      "tiles",
+      "magnetic cubes",
+      "brain teaser",
+      "brain builder",
+      "Buildzle"
+    ]
   }
 ]
